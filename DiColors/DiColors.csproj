@@ -136,6 +136,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="HarmonyPatches\ObjectPoolDecorator.cs" />
     <Compile Include="Installers\DiCGameInstaller.cs" />
+    <Compile Include="Installers\DiCInstaller.cs" />
     <Compile Include="Installers\DiCMenuInstaller.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

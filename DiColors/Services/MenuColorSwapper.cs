@@ -28,7 +28,7 @@ namespace DiColors.Services
 		public void Initialize()
 		{
 			SimpleColorSO colorSO = ScriptableObject.CreateInstance<SimpleColorSO>();
-			colorSO.SetColor(Color.red.ColorWithAlpha(10f));
+			colorSO.SetColor(Color.red);
 
 			var playersPlace = GameObject.Find("MenuPlayersPlace");
 			feetSprite = playersPlace.GetComponentInChildren<SpriteRenderer>();

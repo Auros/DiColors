@@ -3,7 +3,9 @@ using HarmonyLib;
 using SiraUtil.Zenject;
 using System.Reflection;
 using DiColors.Installers;
+using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
+using IPA.Config.Stores;
 
 namespace DiColors
 {
@@ -14,11 +16,13 @@ namespace DiColors
 		private readonly Harmony _harmony;
 
         [Init]
-        public Plugin(IPALogger logger, Zenjector zenjector)
+        public Plugin(Conf conf, IPALogger logger, Zenjector zenjector)
         {
             Log = logger;
+			Config config = conf.Generated<Config>();
 			_harmony = new Harmony("dev.auros.dicolors");
 
+			zenjector.OnApp<DiCInstaller>().WithParameters(config);
 			zenjector.OnMenu<DiCMenuInstaller>();
 			zenjector.OnGame<DiCGameInstaller>();
         }
