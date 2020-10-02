@@ -35,7 +35,8 @@ namespace DiColors
 		{
 			public virtual bool Enabled { get; set; }
 
-			public virtual ColorPair DefaultColor { get; set; }
+			[UseConverter(typeof(HexColorConverter))]
+			public virtual Color DefaultColor { get; set; }
 
 			[NonNullable, UseConverter(typeof(DictionaryConverter<ColorPair>))]
 			public virtual Dictionary<string, ColorPair> ColorPairs { get; set; } = new Dictionary<string, ColorPair>
