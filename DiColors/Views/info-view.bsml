@@ -1,0 +1,12 @@
+<vertical child-align="UpperCenter" anchor-pos-y="-10" spacing="-30" child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+	<horizontal bg="panel-top" pad-left="20" pad-right="20" horizontal-fit="PreferredSize">
+		<text text="Information" align="Center" font-size="10" />
+	</horizontal>
+	<horizontal bg="round-rect-panel" pad="4" pref-width="40">
+		<text text="This mod allows you to change the colors of the arrows, menu colors, and the texture of the arrow glow on the blocks. You can set different profiles on the left and change the colors on the right." />
+	</horizontal>
+	<horizontal bg="panel-bottom" pad="2" pref-width="50" ignore-layout="true" anchor-pos-y="-25" anchor-pos-x="41">
+		<text text="Version 0.1.0" align="Center" />
+		<text text="by Auros" align="Center" />
+	</horizontal>
+</vertical>
