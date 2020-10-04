@@ -36,7 +36,7 @@ namespace DiColors
         [OnDisable]
         public void OnDisable()
         {
-			_harmony.UnpatchAll();
+			_harmony.UnpatchAll("dev.auros.dicolors");
         }
     }
 }
