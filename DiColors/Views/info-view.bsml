@@ -6,7 +6,7 @@
 		<text text="This mod allows you to change the colors of the arrows, menu colors, and the texture of the arrow glow on the blocks. You can set different profiles on the left and change the colors on the right." />
 	</horizontal>
 	<horizontal bg="panel-bottom" pad="2" pref-width="50" ignore-layout="true" anchor-pos-y="-25" anchor-pos-x="41">
-		<text text="Version 0.1.0" align="Center" />
-		<text text="by Auros" align="Center" />
+		<text id="version-text" text="~version" align="Center" />
+		<clickable-text id="secondary-text" text="~secondary" on-click="secondary-clicked" align="Center" hover-hint="Opens Link In Browser" />
 	</horizontal>
 </vertical>
