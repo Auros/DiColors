@@ -1,0 +1,30 @@
+<vertical child-control-height="false" spacing="-11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+	<horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+		<text text="Menu Settings" align="Center" font-size="7" />
+	</horizontal>
+	<horizontal>
+		<settings-container pref-width="60">
+			<color-setting text="Default Menu Color" hover-hint="The color of the main menu." />
+			<color-setting text="Campaign Menu Color" hover-hint="The color of the menu when you're in a campaign." />
+			<color-setting text="Freeplay Menu Color" hover-hint="The color of the menu when you're in the solo or party modes." />
+			<color-setting text="Results Screen Color" hover-hint="The color of the menu when you're on a results screen." />
+			<color-setting text="Players Place Feet" hover-hint="Look down idiot"/>
+			<color-setting text="Players Place Border"/>
+		</settings-container>
+		<settings-container pref-width="40">
+			<bool-setting text="" />
+			<bool-setting text="" />
+			<bool-setting text="" />
+			<bool-setting text="" />
+			<bool-setting text="" />
+			<bool-setting text="" />
+		</settings-container>
+	</horizontal>
+	<vertical ignore-layout="true" pref-width="120" pref-height="40">
+		<bottom-button-panel>
+			<button text="Reset" />
+			<button text="Preview" />
+			<button text="Apply" />
+		</bottom-button-panel>
+	</vertical>
+</vertical>

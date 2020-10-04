@@ -15,8 +15,9 @@ namespace DiColors.Installers
 			Container.Bind(typeof(IInitializable), typeof(IDisposable)).To<MenuButtonManager>().AsSingle();
 
 			// UI
-			Container.Bind<DiColorsInfoView>().FromNewComponentOnNewGameObject().AsSingle();
 			//Container.Bind<DiColorsProfileView>().FromNewComponentOnNewGameObject().AsSingle();
+			Container.Bind<DiColorsInfoView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
+			Container.Bind<DiColorsMenuColorView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
 			Container.Bind<DiColorsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
 		}
 	}

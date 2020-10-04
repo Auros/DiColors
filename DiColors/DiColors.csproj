@@ -157,6 +157,7 @@
     <Compile Include="Services\NoteArrowColorChanger.cs" />
     <Compile Include="Services\ProfileManager.cs" />
     <Compile Include="ViewControllers\DiColorsInfoView.cs" />
+    <Compile Include="ViewControllers\DiColorsMenuColorView.cs" />
     <Compile Include="ViewControllers\DiColorsProfileView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,7 @@
     <None Include="DiColors.csproj.user" Condition="Exists('DiColors.csproj.user')" />
     <EmbeddedResource Include="Views\info-view.bsml" />
     <EmbeddedResource Include="Views\profile-view.bsml" />
+    <EmbeddedResource Include="Views\menu-color-view.bsml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BeatSaberModdingTools.Tasks">
