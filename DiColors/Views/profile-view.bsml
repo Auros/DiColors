@@ -1,0 +1,4 @@
+<vertical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+	<list active="~loaded" id="profile-list" list-style="Simple" select-cell="profile-selected" />
+	<loading active="~loading" preserve-aspect="true" pref-width="40" pref-height="40" />
+</vertical>

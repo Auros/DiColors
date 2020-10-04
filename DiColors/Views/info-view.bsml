@@ -3,7 +3,7 @@
 		<text text="Information" align="Center" font-size="10" />
 	</horizontal>
 	<horizontal bg="round-rect-panel" pad="4" pref-width="40">
-		<text text="This mod allows you to change the colors of the arrows, menu colors, and the texture of the arrow glow on the blocks. You can set different profiles on the left and change the colors on the right." />
+		<text text="This mod allows you to change the colors of the arrows, menu colors, and the texture of the arrow glow on the blocks. You can change the menu colors on the left side and game colors and textures on the right side." />
 	</horizontal>
 	<horizontal bg="panel-bottom" pad="2" pref-width="50" ignore-layout="true" anchor-pos-y="-25" anchor-pos-x="41">
 		<text id="version-text" text="~version" align="Center" />

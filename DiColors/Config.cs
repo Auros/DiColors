@@ -7,11 +7,27 @@ namespace DiColors
 {
 	public class Config
 	{
+		/*public virtual string SelectedProfile { get; set; }
+
+		public virtual string Name { get; set; } = "Default";*/
+
 		[NonNullable]
 		public virtual Game GameSettings { get; set; } = new Game();
 
 		[NonNullable]
 		public virtual Menu MenuSettings { get; set; } = new Menu();
+
+		/*public void Copy(Config config)
+		{
+			var profile = config.Name.Clone() as string;
+			CopyFrom(config);
+			SelectedProfile = profile;
+		}
+
+		public virtual void CopyFrom(Config config)
+		{
+
+		}*/
 
 		public class Game
 		{
@@ -28,7 +44,6 @@ namespace DiColors
 
 			[UseConverter(typeof(HexColorConverter))]
 			public virtual Color RightArrowColor { get; set; }
-
 		}
 
 		public class Menu
