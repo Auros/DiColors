@@ -25,7 +25,7 @@ namespace DiColors.Services
 
 		public void Dispose()
 		{
-			MenuButtons.instance.UnregisterButton(menuButton);
+			MenuButtons.instance?.UnregisterButton(menuButton);
 		}
 
 		private void SummonFlowCoordinator()

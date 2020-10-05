@@ -1,5 +1,6 @@
 using SemVer;
 using Zenject;
+using DiColors.Services;
 
 namespace DiColors.Installers
 {
@@ -16,6 +17,7 @@ namespace DiColors.Installers
 
 		public override void InstallBindings()
 		{
+			Container.Bind<CachedSpriteMediaAsyncLoader>().AsSingle();
 			Container.Bind<Config>().FromInstance(_config).AsSingle();
 			Container.Bind<Config.Menu>().FromInstance(_config.MenuSettings).AsSingle();
 			Container.Bind<Config.Game>().FromInstance(_config.GameSettings).AsSingle();

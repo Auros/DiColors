@@ -22,18 +22,18 @@ namespace DiColors
 			var profile = config.Name.Clone() as string;
 			CopyFrom(config);
 			SelectedProfile = profile;
-		}
+		}*/
 
 		public virtual void CopyFrom(Config config)
 		{
 
-		}*/
+		}
 
 		public class Game
 		{
 			public virtual bool Enabled { get; set; }
 
-			public virtual string ArrowTexture { get; set; }
+			public virtual string ArrowTexture { get; set; } = "Default";
 
 			public virtual bool UseLeftColor { get; set; }
 

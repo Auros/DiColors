@@ -11,13 +11,14 @@ namespace DiColors.Installers
 		public override void InstallBindings()
 		{
 			//Container.Bind<ProfileManager>().AsSingle();
-			Container.Bind(typeof(IInitializable)).To<MenuColorSwapper>().AsSingle();
 			Container.Bind(typeof(IInitializable), typeof(IDisposable)).To<MenuButtonManager>().AsSingle();
+			Container.Bind(typeof(IInitializable), typeof(MenuColorSwapper)).To<MenuColorSwapper>().AsSingle();
 
 			// UI
 			//Container.Bind<DiColorsProfileView>().FromNewComponentOnNewGameObject().AsSingle();
 			Container.Bind<DiColorsInfoView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
 			Container.Bind<DiColorsMenuColorView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
+			Container.Bind<DiColorsGameColorView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
 			Container.Bind<DiColorsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
 		}
 	}

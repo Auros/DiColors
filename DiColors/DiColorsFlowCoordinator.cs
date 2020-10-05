@@ -10,14 +10,16 @@ namespace DiColors
 		private DiColorsInfoView _infoView;
 		//private DiColorsProfileView _profileView;
 		private DiColorsMenuColorView _menuColorView;
+		private DiColorsGameColorView _gameColorView;
 		private MainFlowCoordinator _mainFlowCoordinator;
 
 		[Inject]
-		public void Construct(DiColorsInfoView infoView, DiColorsMenuColorView menuColorView, /*DiColorsProfileView profileView,*/ MainFlowCoordinator mainFlowCoordinator)
+		public void Construct(DiColorsInfoView infoView, DiColorsMenuColorView menuColorView, /*DiColorsProfileView profileView,*/ DiColorsGameColorView gameColorView, MainFlowCoordinator mainFlowCoordinator)
 		{
 			_infoView = infoView;
 			//_profileView = profileView;
 			_menuColorView = menuColorView;
+			_gameColorView = gameColorView;
 			_mainFlowCoordinator = mainFlowCoordinator;
 		}
 
@@ -28,7 +30,7 @@ namespace DiColors
 				title = "DiColors";
 				showBackButton = true;
 			}
-			ProvideInitialViewControllers(_infoView, _menuColorView/*, _profileView*/);
+			ProvideInitialViewControllers(_infoView, _menuColorView, _gameColorView/*, _profileView*/);
 		}
 
 		protected override void BackButtonWasPressed(ViewController topViewController)

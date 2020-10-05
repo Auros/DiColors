@@ -66,6 +66,11 @@
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\HMRendering.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="MediaLoader, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\MediaLoader.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Libs\Newtonsoft.Json.dll</HintPath>
@@ -152,10 +157,12 @@
     <Compile Include="Installers\DiCMenuInstaller.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CachedSpriteMediaAsyncLoader.cs" />
     <Compile Include="Services\MenuButtonManager.cs" />
     <Compile Include="Services\MenuColorSwapper.cs" />
     <Compile Include="Services\NoteArrowColorChanger.cs" />
     <Compile Include="Services\ProfileManager.cs" />
+    <Compile Include="ViewControllers\DiColorsGameColorView.cs" />
     <Compile Include="ViewControllers\DiColorsInfoView.cs" />
     <Compile Include="ViewControllers\DiColorsMenuColorView.cs" />
     <Compile Include="ViewControllers\DiColorsProfileView.cs" />
@@ -170,6 +177,7 @@
     <EmbeddedResource Include="Views\info-view.bsml" />
     <EmbeddedResource Include="Views\profile-view.bsml" />
     <EmbeddedResource Include="Views\menu-color-view.bsml" />
+    <EmbeddedResource Include="Views\game-color-view.bsml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BeatSaberModdingTools.Tasks">

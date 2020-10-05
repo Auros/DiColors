@@ -44,7 +44,7 @@ namespace DiColors.Services
 			feetSprite = playersPlace.GetComponentInChildren<SpriteRenderer>();
 			rectangleFakeGlow = playersPlace.GetComponentInChildren<RectangleFakeGlow>();
 
-			UpdateColors();
+			UpdateColors(_menuConfig);
 
 			/*
 			MenuLightsPresetSO menuLightsPresetSO = _menuLightsManager.GetField<MenuLightsPresetSO, MenuLightsManager>("_defaultPreset");
@@ -62,11 +62,11 @@ namespace DiColors.Services
 			_partyFreePlayFlowCoordinator.SetField("_resultsLightsPreset", menuLightsPresetSO);*/
 		}
 
-		public void UpdateColors()
+		public void UpdateColors(Config.Menu menuConfig)
 		{
 			var defaultColor = CachedColor(Color);
 			defaultMenuLights = CreateMenuLights(defaultColor);
-			if (_menuConfig.ColorPairs.TryGetValue("PlayersPlaceBorder", out Config.ColorPair playersBorderColorPair) && playersBorderColorPair.Enabled)
+			if (menuConfig.ColorPairs.TryGetValue("PlayersPlaceBorder", out Config.ColorPair playersBorderColorPair) && playersBorderColorPair.Enabled)
 			{
 				var colorSO = CachedColor(playersBorderColorPair.Color);
 				defaultMenuLights.SetField("_playersPlaceNeonsColor", colorSO);
@@ -77,11 +77,11 @@ namespace DiColors.Services
 				defaultMenuLights.SetField("_playersPlaceNeonsColor", defaultColor);
 				rectangleFakeGlow.color = defaultColor.color;
 			}
-			if (_menuConfig.ColorPairs.TryGetValue("PlayersPlaceFeet", out Config.ColorPair playersFeetColorPair))
+			if (menuConfig.ColorPairs.TryGetValue("PlayersPlaceFeet", out Config.ColorPair playersFeetColorPair))
 			{
 				feetSprite.color = playersFeetColorPair.Enabled ? playersFeetColorPair.Color : defaultColor.color;
 			}
-			if (_menuConfig.ColorPairs.TryGetValue("Freeplay", out Config.ColorPair freeplay))
+			if (menuConfig.ColorPairs.TryGetValue("Freeplay", out Config.ColorPair freeplay))
 			{
 				if (freeplay.Enabled)
 				{
@@ -95,7 +95,7 @@ namespace DiColors.Services
 					_partyFreePlayFlowCoordinator.SetField("_defaultLightsPreset", defaultMenuLights);
 				} 
 			}
-			if (_menuConfig.ColorPairs.TryGetValue("Results", out Config.ColorPair results))
+			if (menuConfig.ColorPairs.TryGetValue("Results", out Config.ColorPair results))
 			{
 				if (results.Enabled)
 				{
@@ -109,7 +109,7 @@ namespace DiColors.Services
 					_partyFreePlayFlowCoordinator.SetField("_resultsLightsPreset", defaultMenuLights);
 				}
 			}
-			if (_menuConfig.ColorPairs.TryGetValue("Campaigns", out Config.ColorPair campaigns))
+			if (menuConfig.ColorPairs.TryGetValue("Campaigns", out Config.ColorPair campaigns))
 			{
 				if (campaigns.Enabled)
 				{
@@ -122,7 +122,7 @@ namespace DiColors.Services
 				} 
 			}
 			_mainFlowCoordinator.SetField("_defaultLightsPreset", defaultMenuLights);
-			_campaignFlowCoordinator.SetField("_defaultLightsPreset", defaultMenuLights);
+			//_campaignFlowCoordinator.SetField("_defaultLightsPreset", defaultMenuLights);
 		}
 
 		public MenuLightsPresetSO CreateMenuLights(Color color)

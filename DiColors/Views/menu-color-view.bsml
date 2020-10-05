@@ -4,27 +4,26 @@
 	</horizontal>
 	<horizontal>
 		<settings-container pref-width="60">
-			<color-setting text="Default Menu Color" hover-hint="The color of the main menu." />
-			<color-setting text="Campaign Menu Color" hover-hint="The color of the menu when you're in a campaign." />
-			<color-setting text="Freeplay Menu Color" hover-hint="The color of the menu when you're in the solo or party modes." />
-			<color-setting text="Results Screen Color" hover-hint="The color of the menu when you're on a results screen." />
-			<color-setting text="Players Place Feet" hover-hint="Look down idiot"/>
-			<color-setting text="Players Place Border"/>
+			<color-setting get-event="get" value="default" text="Default Menu Color" hover-hint="The color of the main menu." />
+			<color-setting get-event="get" active="~campaign-show" value="campaign" text="Campaign Menu Color" hover-hint="The color of the menu when you're in a campaign." />
+			<color-setting get-event="get" active="~freeplay-show" value="freeplay" text="Freeplay Menu Color" hover-hint="The color of the menu when you're in the solo or party modes." />
+			<color-setting get-event="get" active="~results-show" value="results" text="Results Screen Color" hover-hint="The color of the menu when you're get a new high score on the results screen." />
+			<color-setting get-event="get" active="~feet-show" value="feet" text="Players Place Feet" hover-hint="Look down idiot"/>
+			<color-setting get-event="get" active="~border-show" value="border" text="Players Place Border" hover-hint="The color of the border around the player's place (platform)"/>
 		</settings-container>
 		<settings-container pref-width="40">
-			<bool-setting text="" />
-			<bool-setting text="" />
-			<bool-setting text="" />
-			<bool-setting text="" />
-			<bool-setting text="" />
-			<bool-setting text="" />
+			<bool-setting get-event="get" text=""  value="default-on" />
+			<bool-setting get-event="get" text="" active="~campaign-show" value="campaign-on" />
+			<bool-setting get-event="get" text="" active="~freeplay-show" value="freeplay-on" />
+			<bool-setting get-event="get" text="" active="~results-show" value="results-on" />
+			<bool-setting get-event="get" text="" active="~feet-show" value="feet-on" />
+			<bool-setting get-event="get" text="" active="~border-show" value="border-on" />
 		</settings-container>
 	</horizontal>
 	<vertical ignore-layout="true" pref-width="120" pref-height="40">
 		<bottom-button-panel>
-			<button text="Reset" />
-			<button text="Preview" />
-			<button text="Apply" />
+			<button text="Reset" on-click="on-reset" />
+			<button text="Apply" on-click="on-apply" />
 		</bottom-button-panel>
 	</vertical>
 </vertical>
