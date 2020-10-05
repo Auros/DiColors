@@ -1,10 +1,10 @@
+using Zenject;
 using System.IO;
+using HarmonyLib;
+using UnityEngine;
+using IPA.Utilities;
 using System.Threading;
 using DiColors.Services;
-using HarmonyLib;
-using IPA.Utilities;
-using UnityEngine;
-using Zenject;
 
 namespace DiColors.HarmonyPatches
 {
