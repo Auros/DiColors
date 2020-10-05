@@ -75,7 +75,6 @@ namespace DiColors.ViewControllers
 			_gameConfig = gameConfig;
 			_mediaLoader = mediaLoader;
 			_stashedConfig = _gameConfig.Copy();
-			textureOptions.Add("Default");
 			
 			Directory.CreateDirectory(Constants.FOLDERDIR);
 			Directory.CreateDirectory(Constants.TEXTUREDIR);
@@ -135,6 +134,7 @@ namespace DiColors.ViewControllers
 			textureOptions.Clear();
 			var directory = new DirectoryInfo(Constants.TEXTUREDIR);
 			var files = directory.EnumerateFiles().Where(x => x.Extension.EndsWith("png") || x.Extension.EndsWith("jpg") || x.Extension.EndsWith("jpeg"));
+			textureOptions.Add("Default");
 			for (int i = 0; i < files.Count(); i++)
 			{
 				var file = files.ElementAt(i);

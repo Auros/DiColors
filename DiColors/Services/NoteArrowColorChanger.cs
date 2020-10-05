@@ -2,6 +2,7 @@ using System;
 using Zenject;
 using UnityEngine;
 using IPA.Utilities;
+using System.Runtime.CompilerServices;
 
 namespace DiColors.Services
 {
@@ -14,6 +15,7 @@ namespace DiColors.Services
 
 		private readonly Config.Game _gameConfig;
 		private readonly BeatmapObjectManager _beatmapObjectManager;
+		private readonly ConditionalWeakTable<GameNoteController, ColorNoteVisuals> _colorTable = new ConditionalWeakTable<GameNoteController, ColorNoteVisuals>();
 
 		public NoteArrowColorChanger(Config.Game gameConfig, BeatmapObjectManager beatmapObjectManager)
 		{
@@ -34,8 +36,11 @@ namespace DiColors.Services
 			}
 			if (noteController is GameNoteController gameNoteController)
 			{
-				ColorNoteVisuals cnv = gameNoteController.GetComponent<ColorNoteVisuals>();
-				
+				if (!_colorTable.TryGetValue(gameNoteController, out ColorNoteVisuals cnv))
+				{
+					cnv = gameNoteController.GetComponent<ColorNoteVisuals>();
+					_colorTable.Add(gameNoteController, cnv);
+				}
 				if (gameNoteController.noteData.noteType == NoteType.NoteA && !_gameConfig.UseLeftColor)
 				{
 					return;
@@ -47,8 +52,7 @@ namespace DiColors.Services
 				Color dynamicColor = gameNoteController.noteData.noteType == NoteType.NoteA ? _gameConfig.LeftArrowColor : _gameConfig.RightArrowColor;
 				float intensity = VisualsGlowIntensity(ref cnv);
 				VisualsArrowSprite(ref cnv).color = dynamicColor.ColorWithAlpha(intensity);
-				VisualsCircleSprite(ref cnv).color = dynamicColor;
-				VisualsArrowMesh(ref cnv).material.color = dynamicColor;
+				VisualsCircleSprite(ref cnv).color = dynamicColor.ColorWithAlpha(intensity);
 			}
 		}
 
