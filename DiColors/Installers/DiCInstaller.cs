@@ -21,7 +21,7 @@ namespace DiColors.Installers
 			Container.Bind<Config>().FromInstance(_config).AsSingle();
 			Container.Bind<Config.Menu>().FromInstance(_config.MenuSettings).AsSingle();
 			Container.Bind<Config.Game>().FromInstance(_config.GameSettings).AsSingle();
-			Container.Bind<Version>().WithId("DiColors.Version").FromInstance(_version).AsSingle();
+			Container.Bind<Version>().WithId("DiColors.Version").FromInstance(_version).AsCached();
 		}
 	}
 }
