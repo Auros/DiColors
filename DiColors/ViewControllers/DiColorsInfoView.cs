@@ -4,6 +4,7 @@ using Zenject;
 using UnityEngine;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
+using SiraUtil;
 
 namespace DiColors.ViewControllers
 {
@@ -62,6 +63,7 @@ namespace DiColors.ViewControllers
 		[Inject]
 		public void Construct([Inject(Id = "DiColors.Version")] Version version)
 		{
+			Plugin.Log.NullCheck(version);
 			Version = $"v{version}";
 		}
 

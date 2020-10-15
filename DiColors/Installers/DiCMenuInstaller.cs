@@ -1,25 +1,26 @@
-using System;
 using Zenject;
 using SiraUtil;
 using DiColors.Services;
+using BeatSaberMarkupLanguage;
 using DiColors.ViewControllers;
 
 namespace DiColors.Installers
 {
-	public class DiCMenuInstaller : MonoInstaller
+	public class DiCMenuInstaller : Installer
 	{
 		public override void InstallBindings()
 		{
-			//Container.Bind<ProfileManager>().AsSingle();
-			Container.Bind(typeof(IInitializable), typeof(IDisposable)).To<MenuButtonManager>().AsSingle();
 			Container.Bind(typeof(IInitializable), typeof(MenuColorSwapper)).To<MenuColorSwapper>().AsSingle();
 
 			// UI
-			//Container.Bind<DiColorsProfileView>().FromNewComponentOnNewGameObject().AsSingle();
-			Container.Bind<DiColorsInfoView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
-			Container.Bind<DiColorsMenuColorView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
-			Container.Bind<DiColorsGameColorView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
-			Container.Bind<DiColorsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
+			Container.BindViewController<DiColorsInfoView>(BeatSaberUI.CreateViewController<DiColorsInfoView>());
+			Container.BindViewController<DiColorsMenuColorView>(BeatSaberUI.CreateViewController<DiColorsMenuColorView>());
+			Container.BindViewController<DiColorsGameColorView>(BeatSaberUI.CreateViewController<DiColorsGameColorView>());
+			Container.BindFlowCoordinator<DiColorsFlowCoordinator>(BeatSaberUI.CreateFlowCoordinator<DiColorsFlowCoordinator>());
+			Container.BindInterfacesTo<MenuButtonManager>().AsSingle();
+
+			//Container.Bind<DiColorsFlowCoordinator>().FromNewComponentOnNewGameObject(nameof(DiColorsFlowCoordinator)).AsSingle().Lazy();
+
 		}
 	}
 }

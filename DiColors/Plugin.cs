@@ -25,7 +25,7 @@ namespace DiColors
 
 			zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.Version);
 			zenjector.OnMenu<DiCMenuInstaller>();
-			zenjector.OnGame<DiCGameInstaller>();
+			zenjector.OnGame<DiCGameInstaller>().ShortCircuitOnMultiplayer();
         }
 
         [OnEnable]

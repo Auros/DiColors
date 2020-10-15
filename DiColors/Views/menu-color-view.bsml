@@ -2,7 +2,7 @@
 	<horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
 		<text text="Menu Settings" align="Center" font-size="7" />
 	</horizontal>
-	<horizontal>
+	<!--<horizontal>
 		<settings-container pref-width="60">
 			<color-setting get-event="get" value="default" text="Default Menu Color" hover-hint="The color of the main menu." />
 			<color-setting get-event="get" active="~campaign-show" value="campaign" text="Campaign Menu Color" hover-hint="The color of the menu when you're in a campaign." />
@@ -25,5 +25,5 @@
 			<button text="Reset" on-click="on-reset" />
 			<button text="Apply" on-click="on-apply" />
 		</bottom-button-panel>
-	</vertical>
+	</vertical>-->
 </vertical>

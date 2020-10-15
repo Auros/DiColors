@@ -2,19 +2,19 @@ using HMUI;
 using Zenject;
 using BeatSaberMarkupLanguage;
 using DiColors.ViewControllers;
+using UnityEngine.EventSystems;
 
 namespace DiColors
 {
 	public class DiColorsFlowCoordinator : FlowCoordinator
 	{
 		private DiColorsInfoView _infoView;
-		//private DiColorsProfileView _profileView;
 		private DiColorsMenuColorView _menuColorView;
 		private DiColorsGameColorView _gameColorView;
 		private MainFlowCoordinator _mainFlowCoordinator;
 
 		[Inject]
-		public void Construct(DiColorsInfoView infoView, DiColorsMenuColorView menuColorView, /*DiColorsProfileView profileView,*/ DiColorsGameColorView gameColorView, MainFlowCoordinator mainFlowCoordinator)
+		public void Construct(DiColorsInfoView infoView, DiColorsMenuColorView menuColorView, DiColorsGameColorView gameColorView, MainFlowCoordinator mainFlowCoordinator)
 		{
 			_infoView = infoView;
 			//_profileView = profileView;
@@ -23,11 +23,11 @@ namespace DiColors
 			_mainFlowCoordinator = mainFlowCoordinator;
 		}
 
-		protected override void DidActivate(bool firstActivation, ActivationType activationType)
+		protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
 		{
 			if (firstActivation)
 			{
-				title = "DiColors";
+				SetTitle("DiColors");
 				showBackButton = true;
 			}
 			ProvideInitialViewControllers(_infoView, _menuColorView, _gameColorView/*, _profileView*/);

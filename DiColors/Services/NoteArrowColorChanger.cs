@@ -41,15 +41,15 @@ namespace DiColors.Services
 					cnv = gameNoteController.GetComponent<ColorNoteVisuals>();
 					_colorTable.Add(gameNoteController, cnv);
 				}
-				if (gameNoteController.noteData.noteType == NoteType.NoteA && !_gameConfig.UseLeftColor)
+				if (gameNoteController.noteData.colorType == ColorType.ColorA && !_gameConfig.UseLeftColor)
 				{
 					return;
 				}
-				if (gameNoteController.noteData.noteType == NoteType.NoteB && !_gameConfig.UseRightColor)
+				if (gameNoteController.noteData.colorType == ColorType.ColorB && !_gameConfig.UseRightColor)
 				{
 					return;
 				}
-				Color dynamicColor = gameNoteController.noteData.noteType == NoteType.NoteA ? _gameConfig.LeftArrowColor : _gameConfig.RightArrowColor;
+				Color dynamicColor = gameNoteController.noteData.colorType == ColorType.ColorA ? _gameConfig.LeftArrowColor : _gameConfig.RightArrowColor;
 				float intensity = VisualsGlowIntensity(ref cnv);
 				VisualsArrowSprite(ref cnv).color = dynamicColor.ColorWithAlpha(intensity);
 				VisualsCircleSprite(ref cnv).color = dynamicColor.ColorWithAlpha(intensity);

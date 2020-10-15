@@ -1,6 +1,9 @@
 using System;
 using Zenject;
+using System.Threading;
+using System.Threading.Tasks;
 using BeatSaberMarkupLanguage;
+using DiColors.ViewControllers;
 using BeatSaberMarkupLanguage.MenuButtons;
 
 namespace DiColors.Services
@@ -8,8 +11,8 @@ namespace DiColors.Services
 	public class MenuButtonManager : IInitializable, IDisposable
 	{
 		private readonly MenuButton menuButton;
-		private readonly MainFlowCoordinator _mainFlowCoordinator;
-		private readonly DiColorsFlowCoordinator _diColorsFlowCoordinator;
+		private MainFlowCoordinator _mainFlowCoordinator;
+		private DiColorsFlowCoordinator _diColorsFlowCoordinator;
 
 		public MenuButtonManager(MainFlowCoordinator mainFlowCoordinator, DiColorsFlowCoordinator diColorsFlowCoordinator)
 		{
@@ -18,14 +21,18 @@ namespace DiColors.Services
 			menuButton = new MenuButton("DiColors", SummonFlowCoordinator);
 		}
 
-		public void Initialize()
+		public async void Initialize()
 		{
+			await Task.Run(() => Thread.Sleep(100));
 			MenuButtons.instance.RegisterButton(menuButton);
 		}
 
 		public void Dispose()
 		{
-			MenuButtons.instance?.UnregisterButton(menuButton);
+			if (MenuButtons.IsSingletonAvailable)
+			{
+				MenuButtons.instance?.UnregisterButton(menuButton);
+			}
 		}
 
 		private void SummonFlowCoordinator()

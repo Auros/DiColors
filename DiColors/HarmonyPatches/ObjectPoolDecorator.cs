@@ -3,15 +3,15 @@ using System.IO;
 using HarmonyLib;
 using UnityEngine;
 using IPA.Utilities;
+using SiraUtil.Tools;
 using System.Threading;
-using DiColors.Services;
 
 namespace DiColors.HarmonyPatches
 {
-	[HarmonyPatch(typeof(GameplayCoreBeatmapObjectPoolsInstaller), "InstallBindings")]
+	[HarmonyPatch(typeof(BeatmapObjectsInstaller), "InstallBindings")]
 	internal class ObjectPoolDecorator
 	{
-		internal static async void Prefix(GameplayCoreBeatmapObjectPoolsInstaller __instance, NoteController ____normalBasicNotePrefab)
+		internal static void Prefix(BeatmapObjectsInstaller __instance, NoteController ____normalBasicNotePrefab)
 		{
 			var cnv = ____normalBasicNotePrefab.GetComponent<ColorNoteVisuals>();
 
@@ -19,12 +19,18 @@ namespace DiColors.HarmonyPatches
 			var gameConfig = container.Resolve<Config.Game>();
 			if (!string.IsNullOrEmpty(gameConfig.ArrowTexture) && gameConfig.ArrowTexture != "Default" && File.Exists(Path.Combine(Constants.TEXTUREDIR, gameConfig.ArrowTexture)))
 			{
-				var mediaLoader = container.Resolve<CachedSpriteMediaAsyncLoader>();
+				var mediaLoader = container.Resolve<CachedMediaAsyncLoader>();
 
-				var spriteRenderer = cnv.GetField<SpriteRenderer, ColorNoteVisuals>("_arrowGlowSpriteRenderer");
-				var tex = await mediaLoader.LoadSpriteAsync(Path.Combine(Constants.TEXTUREDIR, gameConfig.ArrowTexture), CancellationToken.None, new Vector2(0.5f, 0.5f), 460, 0, SpriteMeshType.Tight);
-				var sprite = tex;
-				spriteRenderer.sprite = sprite;
+				var spriteRenderer = cnv.GetField<SpriteRenderer, ColorNoteVisuals>("_arrowGlowSpriteRenderer"); //new Vector2(0.5f, 0.5f), 460, 0, SpriteMeshType.Tight
+				if (File.Exists(Path.Combine(Constants.TEXTUREDIR, gameConfig.ArrowTexture)))
+				{
+					var bytes = File.ReadAllBytes(Path.Combine(Constants.TEXTUREDIR, gameConfig.ArrowTexture));
+					var tex = new Texture2D(2, 2);
+					tex.LoadImage(bytes);
+					var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 460, 0, SpriteMeshType.Tight);
+					spriteRenderer.sprite = sprite;
+
+				}
 			}
 		}
 	}

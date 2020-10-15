@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading;
-using DiColors.Services;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using BeatSaberMarkupLanguage.Parser;
@@ -19,7 +18,7 @@ namespace DiColors.ViewControllers
 	{
 		private Config.Game _gameConfig;
 		private Config.Game _stashedConfig;
-		private CachedSpriteMediaAsyncLoader _mediaLoader;
+		private CachedMediaAsyncLoader _mediaLoader;
 		private CancellationTokenSource _cancellationToken;
 
 		[UIValue("textures")]
@@ -70,7 +69,7 @@ namespace DiColors.ViewControllers
 		}
 
 		[Inject]
-		public async void Construct(Config.Game gameConfig, CachedSpriteMediaAsyncLoader mediaLoader)
+		public async void Construct(Config.Game gameConfig, CachedMediaAsyncLoader mediaLoader)
 		{
 			_gameConfig = gameConfig;
 			_mediaLoader = mediaLoader;
@@ -83,7 +82,7 @@ namespace DiColors.ViewControllers
 
 			// Lazily load the new texture
 			await Task.Run(() => Thread.Sleep(2000));
-			await _mediaLoader.LoadSpriteAsync(Path.Combine(Constants.TEXTUREDIR, _gameConfig.ArrowTexture), CancellationToken.None, Vector2.zero);
+			await _mediaLoader.LoadSpriteAsync(Path.Combine(Constants.TEXTUREDIR, _gameConfig.ArrowTexture), CancellationToken.None);
 		}
 
 		[UIAction("#post-parse")]
@@ -99,7 +98,7 @@ namespace DiColors.ViewControllers
 			{
 				try
 				{
-					Sprite texture = await _mediaLoader.LoadSpriteAsync(Path.Combine(Constants.TEXTUREDIR, name), CancellationToken.None, Vector2.zero);
+					Sprite texture = await _mediaLoader.LoadSpriteAsync(Path.Combine(Constants.TEXTUREDIR, name), CancellationToken.None);
 					
 					preview.gameObject.SetActive(true);
 					preview.sprite = texture;
@@ -143,7 +142,7 @@ namespace DiColors.ViewControllers
 			if (dropdown != null)
 			{
 				dropdown.values = textureOptions;
-				dropdown.tableView.ReloadData();
+				dropdown?.UpdateChoices();
 			}
 		}
 
@@ -157,17 +156,17 @@ namespace DiColors.ViewControllers
 			toApplyTo.RightArrowColor = donor.RightArrowColor;
 		}
 
-		protected override void DidActivate(bool firstActivation, ActivationType type)
+		protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
 		{
-			base.DidActivate(firstActivation, type);
+			base.DidActivate(firstActivation, addedToHierarchy, screenSystemEnabling);
 			_cancellationToken = new CancellationTokenSource();
 		}
 
-		protected override void DidDeactivate(DeactivationType deactivationType)
+		protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)
 		{
-			base.DidDeactivate(deactivationType);
-			_cancellationToken.Cancel();
-			parserParams.EmitEvent("hide-modal");
+			base.DidDeactivate(removedFromHierarchy, screenSystemDisabling);
+			_cancellationToken?.Cancel();
+			parserParams?.EmitEvent("hide-modal");
 		}
 	}
 }

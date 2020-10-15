@@ -1,40 +1,38 @@
-<vertical child-control-height="false" spacing="-10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+<vertical pref-height="90" horizontal-fit="PreferredSize" vertical-fit="PreferredSize" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
 	<horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
 		<text text="Game Settings" align="Center" font-size="7" />
 	</horizontal>
-	<horizontal>
-		<settings-container pref-width="60">
-			<color-setting get-event="get" value="left-color" text="Left Arrow" />
-			<color-setting get-event="get" value="right-color" text="Right Arrow" />
-		</settings-container>
+	<!--<horizontal pref-height="30">
 		<settings-container pref-width="40">
 			<bool-setting text="" get-event="get" value="left-enabled" />
 			<bool-setting text="" get-event="get" value="right-enabled" />
 		</settings-container>
-	</horizontal>
-	<horizontal bg="round-rect-panel" pad="3" spacing="5" pref-width="110">
+	</horizontal>-->
+	<settings-container pref-width="100" pref-height="45" >
+		<color-setting get-event="get" value="left-color" text="Left Arrow" />
+		<color-setting get-event="get" value="right-color" text="Right Arrow" />
+		<bool-setting text="a" get-event="get" value="left-enabled" />
+		<bool-setting text="b" get-event="get" value="right-enabled" />
+	</settings-container>
+	<horizontal pref-width="80" bg="round-rect-panel" background-color="cyan" pad="3" spacing="5">
 		<dropdown-list-setting id="dropdown" on-change="load-image" get-event="get-list" value="texture" text="Arrow Glow Texture" options="textures"  />
-		<button text=" " hover-hint="Import Texture" event-click="show-modal" />
+		<button text="Help" hover-hint="Import Texture" event-click="show-modal" />
 	</horizontal>
 	<horizontal pref-width="15" pref-height="15" size-delta-y="15" horizontal-fit="PreferredSize" vertical-fit="PreferredSize">
 		<img id="preview" pref-height="15" preserve-aspect="true" />
 	</horizontal>
-	<vertical ignore-layout="true" pref-width="120" pref-height="40">
-		<bottom-button-panel>
+	<vertical pref-width="80">
+		<horizontal >
 			<button text="Reset" on-click="on-reset" />
 			<button text="Apply" on-click="on-apply" />
-		</bottom-button-panel>
+		</horizontal>
 	</vertical>
 	<modal size-delta-x="70" size-delta-y="30" show-event="show-modal" hide-event="hide-modal" clickerino-offerino-closerino="true">
-		<vertical size-delta-x="40" size-delta-y="30" pref-width="40" pref-height="30">
-			<vertical ignore-layout="true" spacing="-45" anchor-pos-y="5">
-				<text size-delta-x="40" text="Put images in" align="Center" />
-				<text size-delta-x="40" text="Beat Saber/UserData/DiColors/Textures/" align="Center" />
-				<text size-delta-x="40" text="Recommended Resolution: 256x128" align="Center" font-size="3" />
-			</vertical>
-			<vertical ignore-layout="true" pref-width="50" size-delta-y="-30">
-				<button event-click="hide-modal" ignore-layout="true" anchor-pos-y="-23" text="OK" on-click="reload" />
-			</vertical>
+		<vertical>
+			<text size-delta-x="40" size-delta-y="3" text="Put images in" align="Center" />
+			<text size-delta-x="40" size-delta-y="3" text="Beat Saber/UserData/DiColors/Textures/" align="Center" />
+			<text size-delta-x="40" size-delta-y="3" text="Recommended Resolution: 256x128" align="Center" font-size="3" />
+			<button event-click="hide-modal" text="OK" on-click="reload" />
 		</vertical>
 	</modal>
 </vertical>
