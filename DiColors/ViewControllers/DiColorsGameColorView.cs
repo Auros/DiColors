@@ -13,217 +13,217 @@ using BeatSaberMarkupLanguage.Components.Settings;
 
 namespace DiColors.ViewControllers
 {
-	[ViewDefinition("DiColors.Views.game-color-view.bsml")]
-	[HotReload(RelativePathToLayout = @"..\Views\game-color-view.bsml")]
-	public class DiColorsGameColorView : BSMLAutomaticViewController
-	{
-		private Config.Game _gameConfig;
-		private Config.Game _stashedConfig;
-		private CachedMediaAsyncLoader _mediaLoader;
-		private CancellationTokenSource _cancellationToken;
+    [ViewDefinition("DiColors.Views.game-color-view.bsml")]
+    [HotReload(RelativePathToLayout = @"..\Views\game-color-view.bsml")]
+    public class DiColorsGameColorView : BSMLAutomaticViewController
+    {
+        private Config.Game _gameConfig;
+        private Config.Game _stashedConfig;
+        private CachedMediaAsyncLoader _mediaLoader;
+        private CancellationTokenSource _cancellationToken;
 
-		[UIValue("textures")]
-		public List<object> textureOptions = new List<object>();
+        [UIValue("textures")]
+        public List<object> textureOptions = new List<object>();
 
-		[UIComponent("preview")]
-		protected Image preview;
+        [UIComponent("preview")]
+        protected Image preview;
 
-		[UIParams]
-		protected BSMLParserParams parserParams;
+        [UIParams]
+        protected BSMLParserParams parserParams;
 
-		[UIComponent("dropdown")]
-		protected DropDownListSetting dropdown;
+        [UIComponent("dropdown")]
+        protected DropDownListSetting dropdown;
 
-		[UIValue("enabled")]
-		public bool Enabled
-		{
-			get => _gameConfig.Enabled;
-			set => _gameConfig.Enabled = value;
-		}
+        [UIValue("enabled")]
+        public bool Enabled
+        {
+            get => _gameConfig.Enabled;
+            set => _gameConfig.Enabled = value;
+        }
 
-		[UIValue("left-color")]
-		public Color LeftColor
-		{
-			get => _gameConfig.LeftArrowColor;
-			set => _gameConfig.LeftArrowColor = value;
-		}
+        [UIValue("left-color")]
+        public Color LeftColor
+        {
+            get => _gameConfig.LeftArrowColor;
+            set => _gameConfig.LeftArrowColor = value;
+        }
 
-		[UIValue("right-color")]
-		public Color RightColor
-		{
-			get => _gameConfig.RightArrowColor;
-			set => _gameConfig.RightArrowColor = value;
-		}
+        [UIValue("right-color")]
+        public Color RightColor
+        {
+            get => _gameConfig.RightArrowColor;
+            set => _gameConfig.RightArrowColor = value;
+        }
 
-		[UIValue("left-enabled")]
-		public bool LeftEnabled
-		{
-			get => _gameConfig.UseLeftColor;
-			set
-			{
-				_gameConfig.UseLeftColor = value;
-				NotifyPropertyChanged();
-			}
-		}
+        [UIValue("left-enabled")]
+        public bool LeftEnabled
+        {
+            get => _gameConfig.UseLeftColor;
+            set
+            {
+                _gameConfig.UseLeftColor = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-		[UIValue("right-enabled")]
-		public bool RightEnabled
-		{
-			get => _gameConfig.UseRightColor;
-			set
-			{
-				_gameConfig.UseRightColor = value;
-				NotifyPropertyChanged();
-			}
-		}
+        [UIValue("right-enabled")]
+        public bool RightEnabled
+        {
+            get => _gameConfig.UseRightColor;
+            set
+            {
+                _gameConfig.UseRightColor = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-		private bool _showLeft = false;
-		[UIValue("left-show")]
-		public bool LeftShow
-		{
-			get => _showLeft;
-			set
-			{
-				_showLeft = value;
-				NotifyPropertyChanged();
-			}
-		}
+        private bool _showLeft = false;
+        [UIValue("left-show")]
+        public bool LeftShow
+        {
+            get => _showLeft;
+            set
+            {
+                _showLeft = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-		private bool _showRight = false;
-		[UIValue("right-show")]
-		public bool RightShow
-		{
-			get => _showRight;
-			set
-			{
-				_showRight = value;
-				NotifyPropertyChanged();
-			}
-		}
+        private bool _showRight = false;
+        [UIValue("right-show")]
+        public bool RightShow
+        {
+            get => _showRight;
+            set
+            {
+                _showRight = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-		[UIAction("left-status-change")]
-		public void OnLeftStatusChange(bool value)
-		{
-			LeftShow = value;
-		}
+        [UIAction("left-status-change")]
+        public void OnLeftStatusChange(bool value)
+        {
+            LeftShow = value;
+        }
 
-		[UIAction("right-status-change")]
-		public void OnRightStatusChange(bool value)
-		{
-			RightShow = value;
-		}
+        [UIAction("right-status-change")]
+        public void OnRightStatusChange(bool value)
+        {
+            RightShow = value;
+        }
 
 
-		[UIValue("texture")]
-		public string Texture
-		{
-			get => File.Exists(Path.Combine(Constants.TEXTUREDIR, _gameConfig.ArrowTexture)) ? new FileInfo(Path.Combine(Constants.TEXTUREDIR, _gameConfig.ArrowTexture)).Name : "Default";
-			set => _gameConfig.ArrowTexture = value;
-		}
+        [UIValue("texture")]
+        public string Texture
+        {
+            get => File.Exists(Path.Combine(Constants.TEXTUREDIR, _gameConfig.ArrowTexture)) ? new FileInfo(Path.Combine(Constants.TEXTUREDIR, _gameConfig.ArrowTexture)).Name : "Default";
+            set => _gameConfig.ArrowTexture = value;
+        }
 
-		[Inject]
-		public async void Construct(Config.Game gameConfig, CachedMediaAsyncLoader mediaLoader)
-		{
-			_gameConfig = gameConfig;
-			_mediaLoader = mediaLoader;
-			_stashedConfig = _gameConfig.Copy();
-			
-			Directory.CreateDirectory(Constants.FOLDERDIR);
-			Directory.CreateDirectory(Constants.TEXTUREDIR);
+        [Inject]
+        public async void Construct(Config.Game gameConfig, CachedMediaAsyncLoader mediaLoader)
+        {
+            _gameConfig = gameConfig;
+            _mediaLoader = mediaLoader;
+            _stashedConfig = _gameConfig.Copy();
+            
+            Directory.CreateDirectory(Constants.FOLDERDIR);
+            Directory.CreateDirectory(Constants.TEXTUREDIR);
 
-			Reload();
+            Reload();
 
-			// Lazily load the new texture
-			await Task.Run(() => Thread.Sleep(2000));
-			await _mediaLoader.LoadSpriteAsync(Path.Combine(Constants.TEXTUREDIR, _gameConfig.ArrowTexture), CancellationToken.None);
-		}
+            // Lazily load the new texture
+            await Task.Run(() => Thread.Sleep(2000));
+            await _mediaLoader.LoadSpriteAsync(Path.Combine(Constants.TEXTUREDIR, _gameConfig.ArrowTexture), CancellationToken.None);
+        }
 
-		[UIAction("#post-parse")]
-		protected void Parsed()
-		{
-			LoadImage(_gameConfig.ArrowTexture);
-			LeftShow = _gameConfig.UseLeftColor;
-			RightShow = _gameConfig.UseRightColor;
-		}
+        [UIAction("#post-parse")]
+        protected void Parsed()
+        {
+            LoadImage(_gameConfig.ArrowTexture);
+            LeftShow = _gameConfig.UseLeftColor;
+            RightShow = _gameConfig.UseRightColor;
+        }
 
-		[UIAction("load-image")]
-		protected async void LoadImage(string name)
-		{
-			if (!string.IsNullOrEmpty(name) && name != "Default" && File.Exists(Path.Combine(Constants.TEXTUREDIR, name)))
-			{
-				try
-				{
-					Sprite texture = await _mediaLoader.LoadSpriteAsync(Path.Combine(Constants.TEXTUREDIR, name), CancellationToken.None);
-					
-					preview.gameObject.SetActive(true);
-					preview.sprite = texture;
-				}
-				catch { }
-			}
-			else
-			{
-				preview.gameObject.SetActive(false);
-			}
-		}
+        [UIAction("load-image")]
+        protected async void LoadImage(string name)
+        {
+            if (!string.IsNullOrEmpty(name) && name != "Default" && File.Exists(Path.Combine(Constants.TEXTUREDIR, name)))
+            {
+                try
+                {
+                    Sprite texture = await _mediaLoader.LoadSpriteAsync(Path.Combine(Constants.TEXTUREDIR, name), CancellationToken.None);
+                    
+                    preview.gameObject.SetActive(true);
+                    preview.sprite = texture;
+                }
+                catch { }
+            }
+            else
+            {
+                preview.gameObject.SetActive(false);
+            }
+        }
 
-		[UIAction("on-reset")]
-		protected void Reset()
-		{
-			Apply(_gameConfig, _stashedConfig);
-			parserParams.EmitEvent("get");
-			Reload();
-		}
+        [UIAction("on-reset")]
+        protected void Reset()
+        {
+            Apply(_gameConfig, _stashedConfig);
+            parserParams.EmitEvent("get");
+            Reload();
+        }
 
-		[UIAction("on-apply")]
-		protected void Apply()
-		{
-			parserParams.EmitEvent("apply");
-			_stashedConfig = _gameConfig.Copy();
-			Reload();
-		}
+        [UIAction("on-apply")]
+        protected void Apply()
+        {
+            parserParams.EmitEvent("apply");
+            _stashedConfig = _gameConfig.Copy();
+            Reload();
+        }
 
-		[UIAction("reload")]
-		protected void Reload()
-		{
-			textureOptions.Clear();
-			var directory = new DirectoryInfo(Constants.TEXTUREDIR);
-			var files = directory.EnumerateFiles().Where(x => x.Extension.EndsWith("png") || x.Extension.EndsWith("jpg") || x.Extension.EndsWith("jpeg"));
-			textureOptions.Add("Default");
-			for (int i = 0; i < files.Count(); i++)
-			{
-				var file = files.ElementAt(i);
-				textureOptions.Add(file.Name);
-			}
-			if (dropdown != null)
-			{
-				dropdown.values = textureOptions;
-				dropdown?.UpdateChoices();
-			}
-		}
+        [UIAction("reload")]
+        protected void Reload()
+        {
+            textureOptions.Clear();
+            var directory = new DirectoryInfo(Constants.TEXTUREDIR);
+            var files = directory.EnumerateFiles().Where(x => x.Extension.EndsWith("png") || x.Extension.EndsWith("jpg") || x.Extension.EndsWith("jpeg"));
+            textureOptions.Add("Default");
+            for (int i = 0; i < files.Count(); i++)
+            {
+                var file = files.ElementAt(i);
+                textureOptions.Add(file.Name);
+            }
+            if (dropdown != null)
+            {
+                dropdown.values = textureOptions;
+                dropdown?.UpdateChoices();
+            }
+        }
 
-		private void Apply(Config.Game toApplyTo, Config.Game donor)
-		{
-			toApplyTo.Enabled = donor.Enabled;
-			toApplyTo.ArrowTexture = donor.ArrowTexture;
-			toApplyTo.UseLeftColor = donor.UseLeftColor;
-			toApplyTo.UseRightColor = donor.UseRightColor;
-			toApplyTo.LeftArrowColor = donor.LeftArrowColor;
-			toApplyTo.RightArrowColor = donor.RightArrowColor;
-		}
+        private void Apply(Config.Game toApplyTo, Config.Game donor)
+        {
+            toApplyTo.Enabled = donor.Enabled;
+            toApplyTo.ArrowTexture = donor.ArrowTexture;
+            toApplyTo.UseLeftColor = donor.UseLeftColor;
+            toApplyTo.UseRightColor = donor.UseRightColor;
+            toApplyTo.LeftArrowColor = donor.LeftArrowColor;
+            toApplyTo.RightArrowColor = donor.RightArrowColor;
+        }
 
-		protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
-		{
-			base.DidActivate(firstActivation, addedToHierarchy, screenSystemEnabling);
-			_cancellationToken = new CancellationTokenSource();
-			LeftShow = _gameConfig.UseLeftColor;
-			RightShow = _gameConfig.UseRightColor;
-		}
+        protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
+        {
+            base.DidActivate(firstActivation, addedToHierarchy, screenSystemEnabling);
+            _cancellationToken = new CancellationTokenSource();
+            LeftShow = _gameConfig.UseLeftColor;
+            RightShow = _gameConfig.UseRightColor;
+        }
 
-		protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)
-		{
-			base.DidDeactivate(removedFromHierarchy, screenSystemDisabling);
-			_cancellationToken?.Cancel();
-			parserParams?.EmitEvent("hide-modal");
-		}
-	}
+        protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)
+        {
+            base.DidDeactivate(removedFromHierarchy, screenSystemDisabling);
+            _cancellationToken?.Cancel();
+            parserParams?.EmitEvent("hide-modal");
+        }
+    }
 }

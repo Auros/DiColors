@@ -14,31 +14,31 @@ namespace DiColors
     public class Plugin
     {
         internal static IPALogger Log { get; private set; }
-		private readonly Harmony _harmony;
+        private readonly Harmony _harmony;
 
         [Init]
         public Plugin(Conf conf, IPALogger logger, Zenjector zenjector, PluginMetadata metadata)
         {
             Log = logger;
-			Config config = conf.Generated<Config>();
-			_harmony = new Harmony("dev.auros.dicolors");
-			config.Version = metadata.Version;
+            Config config = conf.Generated<Config>();
+            _harmony = new Harmony("dev.auros.dicolors");
+            config.Version = metadata.Version;
 
-			zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.Version);
-			zenjector.OnMenu<DiCMenuInstaller>().Expose<FlickeringNeonSign>();
-			zenjector.OnGame<DiCGameInstaller>().ShortCircuitForMultiplayer();
+            zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.Version);
+            zenjector.OnMenu<DiCMenuInstaller>().Expose<FlickeringNeonSign>();
+            zenjector.OnGame<DiCGameInstaller>().ShortCircuitForMultiplayer();
         }
 
         [OnEnable]
         public void OnEnable()
         {
-			_harmony.PatchAll(Assembly.GetExecutingAssembly());
+            _harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
         [OnDisable]
         public void OnDisable()
         {
-			_harmony.UnpatchAll("dev.auros.dicolors");
+            _harmony.UnpatchAll("dev.auros.dicolors");
         }
     }
 }

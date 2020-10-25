@@ -1,12 +1,12 @@
 <vertical pref-width="80" pref-height="60" horizontal-fit="PreferredSize" vertical-fit="PreferredSize" spacing="20" child-align="UpperCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-	<horizontal bg="panel-top" bg-color="#833ac7" pref-width="130" horizontal-fit="PreferredSize">
-		<text text="Information" align="Center" font-size="10" />
-	</horizontal>
-	<horizontal bg="round-rect-panel" background-color="grey" pad="4" pref-width="40">
-		<text text="This mod allows you to change the colors of the arrows, menu colors, menu logo, and the texture of the arrow glow on the blocks. You can change the menu colors on the left side and game colors and textures on the right side." />
-	</horizontal>
-	<horizontal pad="2" pref-width="50" anchor-pos-y="-30" anchor-pos-x="15">
-		<text id="version-text" text="~version" align="Center" />
-		<clickable-text id="secondary-text" text="~secondary" on-click="secondary-clicked" align="Center" hover-hint="Opens Link In Browser" />
-	</horizontal>
+    <horizontal bg="panel-top" bg-color="#833ac7" pref-width="130" horizontal-fit="PreferredSize">
+        <text text="Information" align="Center" font-size="10" />
+    </horizontal>
+    <horizontal bg="round-rect-panel" background-color="grey" pad="4" pref-width="40">
+        <text text="This mod allows you to change the colors of the arrows, menu colors, menu logo, and the texture of the arrow glow on the blocks. You can change the menu colors on the left side and game colors and textures on the right side." />
+    </horizontal>
+    <horizontal pad="2" pref-width="50" anchor-pos-y="-30" anchor-pos-x="15">
+        <text id="version-text" text="~version" align="Center" />
+        <clickable-text id="secondary-text" text="~secondary" on-click="secondary-clicked" align="Center" hover-hint="Opens Link In Browser" />
+    </horizontal>
 </vertical>
