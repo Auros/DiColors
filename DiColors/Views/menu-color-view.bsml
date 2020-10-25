@@ -1,29 +1,56 @@
-<vertical child-control-height="false" spacing="-11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-	<horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+<vertical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+	<horizontal bg="panel-top-gradient" bg-color="#8753b8" pref-width="100" horizontal-fit="PreferredSize">
 		<text text="Menu Settings" align="Center" font-size="7" />
+		<tab-selector tab-tag="yo" />
 	</horizontal>
-	<!--<horizontal>
-		<settings-container pref-width="60">
-			<color-setting get-event="get" value="default" text="Default Menu Color" hover-hint="The color of the main menu." />
-			<color-setting get-event="get" active="~campaign-show" value="campaign" text="Campaign Menu Color" hover-hint="The color of the menu when you're in a campaign." />
-			<color-setting get-event="get" active="~freeplay-show" value="freeplay" text="Freeplay Menu Color" hover-hint="The color of the menu when you're in the solo or party modes." />
-			<color-setting get-event="get" active="~results-show" value="results" text="Results Screen Color" hover-hint="The color of the menu when you're get a new high score on the results screen." />
-			<color-setting get-event="get" active="~feet-show" value="feet" text="Players Place Feet" hover-hint="Look down idiot"/>
-			<color-setting get-event="get" active="~border-show" value="border" text="Players Place Border" hover-hint="The color of the border around the player's place (platform)"/>
-		</settings-container>
-		<settings-container pref-width="40">
-			<bool-setting get-event="get" text=""  value="default-on" />
-			<bool-setting get-event="get" text="" active="~campaign-show" value="campaign-on" />
-			<bool-setting get-event="get" text="" active="~freeplay-show" value="freeplay-on" />
-			<bool-setting get-event="get" text="" active="~results-show" value="results-on" />
-			<bool-setting get-event="get" text="" active="~feet-show" value="feet-on" />
-			<bool-setting get-event="get" text="" active="~border-show" value="border-on" />
-		</settings-container>
+	<horizontal>
+		<tab tab-name="Page 1" tags="yo" >
+			<horizontal background="round-rect-panel" pref-width="100" background-color="grey" pad="2">
+				<vertical pref-width="70">
+					<color-setting get-event="get" value="default" text="Default Menu Color" hover-hint="The color of the main menu." />
+					<color-setting get-event="get" active="~campaign-show" value="campaign" text="Campaign Menu Color" hover-hint="The color of the menu when you're in the campaign menu." />
+					<color-setting get-event="get" active="~freeplay-show" value="freeplay" text="Freeplay Menu Color" hover-hint="The color of the menu when you're in the solo or party mode menu." />
+					<color-setting get-event="get" active="~results-show" value="results" text="Results Pass Color" hover-hint="The color of the menu when you get a new high score on the results screen." />
+				</vertical>
+				<vertical pref-width="20">
+					<bool-setting get-event="get" text=""  value="default-on" />
+					<bool-setting get-event="get" text="" active="~campaign-show" value="campaign-on" />
+					<bool-setting get-event="get" text="" active="~freeplay-show" value="freeplay-on" />
+					<bool-setting get-event="get" text="" active="~results-show" value="results-on" />
+				</vertical>
+			</horizontal>
+		</tab>
+		<tab tab-name="Page 2" tags="yo" >
+			<horizontal background="round-rect-panel" pref-width="100" background-color="grey" pad="2">
+				<vertical pref-width="70">
+					<color-setting get-event="get" active="~results-fail-show" value="results-fail" text="Results Fail Color" hover-hint="The color of the menu when you fail a level." />
+					<color-setting get-event="get" active="~multiplayer-menu-show" value="multiplayer-menu" text="Multi Menu Color" hover-hint="The color of the menu when you're in the multiplayer menu." />
+					<color-setting get-event="get" active="~multiplayer-countdown-show" value="multiplayer-countdown" text="Multi Countdown Color" hover-hint="The color of the menu when multiplayer is counting down to start." />
+				</vertical>
+				<vertical pref-width="20">
+					<bool-setting get-event="get" text="" active="~results-fail-show" value="results-fail-on" />
+					<bool-setting get-event="get" text="" active="~multiplayer-menu-show" value="multiplayer-menu-on" />
+					<bool-setting get-event="get" text="" active="~multiplayer-countdown-show" value="multiplayer-countdown-on" />
+				</vertical>
+			</horizontal>
+		</tab>
+		<tab tab-name="Page 3" tags="yo">
+			<horizontal background="round-rect-panel" pref-width="100" background-color="grey" pad="2">
+				<vertical pref-width="70">
+					<color-setting get-event="get" active="~feet-show" value="feet" text="Players Place Feet" hover-hint="Look down idiot"/>
+					<color-setting get-event="get" active="~beat-show" value="beat" text="BEAT Logo" />
+					<color-setting get-event="get" active="~saber-show" value="saber" text="SABER Logo" />
+				</vertical>
+				<vertical pref-width="20">
+					<bool-setting get-event="get" text="" active="~feet-show" value="feet-on" />
+					<bool-setting get-event="get" text="" active="~beat-show" value="beat-on" />
+					<bool-setting get-event="get" text="" active="~saber-show" value="saber-on" />
+				</vertical>
+			</horizontal>
+		</tab>	
 	</horizontal>
-	<vertical ignore-layout="true" pref-width="120" pref-height="40">
-		<bottom-button-panel>
-			<button text="Reset" on-click="on-reset" />
-			<button text="Apply" on-click="on-apply" />
-		</bottom-button-panel>
-	</vertical>-->
+	<horizontal>
+		<button text="Reset" on-click="on-reset" pref-width="30" />
+		<button text="Apply" on-click="on-apply" pref-width="30" />
+	</horizontal>
 </vertical>

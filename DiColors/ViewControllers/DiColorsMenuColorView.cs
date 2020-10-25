@@ -1,8 +1,6 @@
 using Zenject;
 using UnityEngine;
-using System.Threading;
 using DiColors.Services;
-using System.Threading.Tasks;
 using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
@@ -10,6 +8,7 @@ using BeatSaberMarkupLanguage.ViewControllers;
 namespace DiColors.ViewControllers
 {
 	// dont look at this class pretend it doesnt exist dont use it as an example, seriously there is some sketch stuff goin on here
+	[ViewDefinition("DiColors.Views.menu-color-view.bsml")]
 	[HotReload(RelativePathToLayout = @"..\Views\menu-color-view.bsml")]
 	public class DiColorsMenuColorView : BSMLAutomaticViewController
 	{
@@ -87,8 +86,61 @@ namespace DiColors.ViewControllers
 
 		[UIValue("results-show")]
 		public bool resultsShow { get; set; }
-
 		private Config.ColorPair _resultsPair;
+
+		[UIValue("results-fail")]
+		protected Color resultsFail
+		{
+			get => _resultsFailPair.Color;
+			set => _resultsFailPair.Color = value;
+		}
+
+		[UIValue("results-fail-on")]
+		protected bool resultsFailOn
+		{
+			get => _resultsFailPair.Enabled;
+			set => _resultsFailPair.Enabled = value;
+		}
+
+		[UIValue("results-fail-show")]
+		public bool resultsFailShow { get; set; }
+		private Config.ColorPair _resultsFailPair;
+
+		[UIValue("multiplayer-menu")]
+		protected Color multiplayerMenu
+		{
+			get => _multiplayerMenuPair.Color;
+			set => _multiplayerMenuPair.Color = value;
+		}
+
+		[UIValue("multiplayer-menu-on")]
+		protected bool multiplayerMenuOn
+		{
+			get => _multiplayerMenuPair.Enabled;
+			set => _multiplayerMenuPair.Enabled = value;
+		}
+
+		[UIValue("multiplayer-menu-show")]
+		public bool multiplayerMenuShow { get; set; }
+		private Config.ColorPair _multiplayerMenuPair;
+
+		[UIValue("multiplayer-countdown")]
+		protected Color multiplayerCountdown
+		{
+			get => _multiplayerCountdownPair.Color;
+			set => _multiplayerCountdownPair.Color = value;
+		}
+
+		[UIValue("multiplayer-countdown-on")]
+		protected bool multiplayerCountdownOn
+		{
+			get => _multiplayerCountdownPair.Enabled;
+			set => _multiplayerCountdownPair.Enabled = value;
+		}
+
+		[UIValue("multiplayer-countdown-show")]
+		public bool multiplayerCountdownShow { get; set; }
+		private Config.ColorPair _multiplayerCountdownPair;
 
 		[UIValue("feet")]
 		protected Color feet
@@ -109,24 +161,44 @@ namespace DiColors.ViewControllers
 
 		private Config.ColorPair _feetPair;
 
-		[UIValue("border")]
-		protected Color border
+
+		[UIValue("beat")]
+		protected Color beat
 		{
-			get => _borderPair.Color;
-			set => _borderPair.Color = value;
+			get => _beatPair.Color;
+			set => _beatPair.Color = value;
 		}
 
-		[UIValue("border-on")]
-		protected bool borderOn
+		[UIValue("beat-on")]
+		protected bool beatOn
 		{
-			get => _borderPair.Enabled;
-			set => _borderPair.Enabled = value;
+			get => _beatPair.Enabled;
+			set => _beatPair.Enabled = value;
 		}
 
-		[UIValue("border-show")]
-		public bool borderShow { get; set; }
+		[UIValue("beat-show")]
+		public bool beatShow { get; set; }
 
-		private Config.ColorPair _borderPair;
+		private Config.ColorPair _beatPair;
+
+		[UIValue("saber")]
+		protected Color saber
+		{
+			get => _saberPair.Color;
+			set => _saberPair.Color = value;
+		}
+
+		[UIValue("saber-on")]
+		protected bool saberOn
+		{
+			get => _saberPair.Enabled;
+			set => _saberPair.Enabled = value;
+		}
+
+		[UIValue("saber-show")]
+		public bool saberShow { get; set; }
+
+		private Config.ColorPair _saberPair;
 
 		[UIParams]
 		protected BSMLParserParams parserParams;
@@ -140,17 +212,25 @@ namespace DiColors.ViewControllers
 			_colorSwapper = menuColorSwapper;
 			_stashedConfig = _menuConfig.Copy();
 
-			_menuConfig.ColorPairs.TryGetValue("Freeplay", out _freeplayPair);
-			_menuConfig.ColorPairs.TryGetValue("Results", out _resultsPair);
-			_menuConfig.ColorPairs.TryGetValue("Campaigns", out _campaignPair);
-			_menuConfig.ColorPairs.TryGetValue("PlayersPlaceBorder", out _borderPair);
-			_menuConfig.ColorPairs.TryGetValue("PlayersPlaceFeet", out _feetPair);
+			beatShow = _menuConfig.ColorPairs.TryGetValue("Beat", out _beatPair);
+			saberShow = _menuConfig.ColorPairs.TryGetValue("Saber", out _saberPair);
+			resultsShow = _menuConfig.ColorPairs.TryGetValue("Results", out _resultsPair);
+			feetShow = _menuConfig.ColorPairs.TryGetValue("PlayersPlaceFeet", out _feetPair);
+			freeplayShow = _menuConfig.ColorPairs.TryGetValue("Freeplay", out _freeplayPair);
+			campaignShow = _menuConfig.ColorPairs.TryGetValue("Campaigns", out _campaignPair);
+			resultsFailShow = _menuConfig.ColorPairs.TryGetValue("ResultsFail", out _resultsFailPair);
+			multiplayerMenuShow = _menuConfig.ColorPairs.TryGetValue("Multiplayer", out _multiplayerMenuPair);
+			multiplayerCountdownShow = _menuConfig.ColorPairs.TryGetValue("MultiplayerCountdown", out _multiplayerCountdownPair);
 
-			freeplayShow = !(_freeplayPair is null);
-			resultsShow = !(_resultsPair is null);
-			campaignShow = !(_campaignPair is null);
-			borderShow = !(_borderPair is null);
-			feetShow = !(_feetPair is null);
+			if (_feetPair == null) { _feetPair = new Config.ColorPair(); }
+			if (_beatPair == null) { _beatPair = new Config.ColorPair(); }
+			if (_saberPair == null) { _saberPair = new Config.ColorPair(); }
+			if (_resultsPair == null) { _resultsPair = new Config.ColorPair(); }
+			if (_freeplayPair == null) { _freeplayPair = new Config.ColorPair(); }
+			if (_campaignPair == null) { _campaignPair = new Config.ColorPair(); }
+			if (_resultsFailPair == null) { _resultsFailPair = new Config.ColorPair(); }
+			if (_multiplayerMenuPair == null) { _multiplayerMenuPair = new Config.ColorPair(); }
+			if (_multiplayerCountdownPair == null) { _multiplayerCountdownPair = new Config.ColorPair(); }
 		}
 
 		[UIAction("on-reset")]
@@ -166,7 +246,7 @@ namespace DiColors.ViewControllers
 		{
 			parserParams.EmitEvent("apply");
 			_fader.FadeOut();
-			await Task.Run(() => Thread.Sleep(500));
+			await SiraUtil.Utilities.AwaitSleep(500);
 			_transitioner.RestartGame();
 		}
 

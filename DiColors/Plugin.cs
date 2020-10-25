@@ -22,10 +22,11 @@ namespace DiColors
             Log = logger;
 			Config config = conf.Generated<Config>();
 			_harmony = new Harmony("dev.auros.dicolors");
+			config.Version = metadata.Version;
 
 			zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.Version);
-			zenjector.OnMenu<DiCMenuInstaller>();
-			zenjector.OnGame<DiCGameInstaller>().ShortCircuitOnMultiplayer();
+			zenjector.OnMenu<DiCMenuInstaller>().Expose<FlickeringNeonSign>();
+			zenjector.OnGame<DiCGameInstaller>().ShortCircuitForMultiplayer();
         }
 
         [OnEnable]

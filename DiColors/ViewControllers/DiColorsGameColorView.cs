@@ -13,6 +13,7 @@ using BeatSaberMarkupLanguage.Components.Settings;
 
 namespace DiColors.ViewControllers
 {
+	[ViewDefinition("DiColors.Views.game-color-view.bsml")]
 	[HotReload(RelativePathToLayout = @"..\Views\game-color-view.bsml")]
 	public class DiColorsGameColorView : BSMLAutomaticViewController
 	{
@@ -33,6 +34,13 @@ namespace DiColors.ViewControllers
 		[UIComponent("dropdown")]
 		protected DropDownListSetting dropdown;
 
+		[UIValue("enabled")]
+		public bool Enabled
+		{
+			get => _gameConfig.Enabled;
+			set => _gameConfig.Enabled = value;
+		}
+
 		[UIValue("left-color")]
 		public Color LeftColor
 		{
@@ -51,15 +59,60 @@ namespace DiColors.ViewControllers
 		public bool LeftEnabled
 		{
 			get => _gameConfig.UseLeftColor;
-			set => _gameConfig.UseLeftColor = value;
+			set
+			{
+				_gameConfig.UseLeftColor = value;
+				NotifyPropertyChanged();
+			}
 		}
 
 		[UIValue("right-enabled")]
 		public bool RightEnabled
 		{
 			get => _gameConfig.UseRightColor;
-			set => _gameConfig.UseRightColor = value;
+			set
+			{
+				_gameConfig.UseRightColor = value;
+				NotifyPropertyChanged();
+			}
 		}
+
+		private bool _showLeft = false;
+		[UIValue("left-show")]
+		public bool LeftShow
+		{
+			get => _showLeft;
+			set
+			{
+				_showLeft = value;
+				NotifyPropertyChanged();
+			}
+		}
+
+		private bool _showRight = false;
+		[UIValue("right-show")]
+		public bool RightShow
+		{
+			get => _showRight;
+			set
+			{
+				_showRight = value;
+				NotifyPropertyChanged();
+			}
+		}
+
+		[UIAction("left-status-change")]
+		public void OnLeftStatusChange(bool value)
+		{
+			LeftShow = value;
+		}
+
+		[UIAction("right-status-change")]
+		public void OnRightStatusChange(bool value)
+		{
+			RightShow = value;
+		}
+
 
 		[UIValue("texture")]
 		public string Texture
@@ -89,6 +142,8 @@ namespace DiColors.ViewControllers
 		protected void Parsed()
 		{
 			LoadImage(_gameConfig.ArrowTexture);
+			LeftShow = _gameConfig.UseLeftColor;
+			RightShow = _gameConfig.UseRightColor;
 		}
 
 		[UIAction("load-image")]
@@ -160,6 +215,8 @@ namespace DiColors.ViewControllers
 		{
 			base.DidActivate(firstActivation, addedToHierarchy, screenSystemEnabling);
 			_cancellationToken = new CancellationTokenSource();
+			LeftShow = _gameConfig.UseLeftColor;
+			RightShow = _gameConfig.UseRightColor;
 		}
 
 		protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)

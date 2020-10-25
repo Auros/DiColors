@@ -1,7 +1,6 @@
 using Zenject;
 using SiraUtil;
 using DiColors.Services;
-using BeatSaberMarkupLanguage;
 using DiColors.ViewControllers;
 
 namespace DiColors.Installers
@@ -11,16 +10,14 @@ namespace DiColors.Installers
 		public override void InstallBindings()
 		{
 			Container.Bind(typeof(IInitializable), typeof(MenuColorSwapper)).To<MenuColorSwapper>().AsSingle();
+			Container.Bind(typeof(IInitializable), typeof(SignColorSwapper)).To<SignColorSwapper>().AsSingle();
 
 			// UI
-			Container.BindViewController<DiColorsInfoView>(BeatSaberUI.CreateViewController<DiColorsInfoView>());
-			Container.BindViewController<DiColorsMenuColorView>(BeatSaberUI.CreateViewController<DiColorsMenuColorView>());
-			Container.BindViewController<DiColorsGameColorView>(BeatSaberUI.CreateViewController<DiColorsGameColorView>());
-			Container.BindFlowCoordinator<DiColorsFlowCoordinator>(BeatSaberUI.CreateFlowCoordinator<DiColorsFlowCoordinator>());
+			Container.BindViewController<DiColorsInfoView>();
+			Container.BindViewController<DiColorsMenuColorView>();
+			Container.BindViewController<DiColorsGameColorView>();
+			Container.BindFlowCoordinator<DiColorsFlowCoordinator>();
 			Container.BindInterfacesTo<MenuButtonManager>().AsSingle();
-
-			//Container.Bind<DiColorsFlowCoordinator>().FromNewComponentOnNewGameObject(nameof(DiColorsFlowCoordinator)).AsSingle().Lazy();
-
 		}
 	}
 }

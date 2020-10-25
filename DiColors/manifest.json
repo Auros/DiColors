@@ -3,13 +3,12 @@
   "id": "DiColors",
   "name": "DiColors",
   "author": "Auros",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A mod which allows you to change the color of various things including the note arrow color, brightness, and menu lights.",
-  "gameVersion": "1.11.1",
+  "gameVersion": "1.12.2",
   "dependsOn": {
     "BSIPA": "^4.0.0",
 	"SiraUtil": "^2.0.0",
-	"BeatSaberMarkupLanguage": "^1.3.5"
-  },
-  "features": []
+	"BeatSaberMarkupLanguage": "^1.4.0"
+  }
 }

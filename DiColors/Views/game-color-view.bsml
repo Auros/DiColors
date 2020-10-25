@@ -1,32 +1,23 @@
-<vertical pref-height="90" horizontal-fit="PreferredSize" vertical-fit="PreferredSize" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-	<horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+<vertical horizontal-fit="PreferredSize" vertical-fit="PreferredSize" spacing="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+	<horizontal bg="panel-top-gradient" bg-color="#8753b8" pref-width="100" horizontal-fit="PreferredSize">
 		<text text="Game Settings" align="Center" font-size="7" />
 	</horizontal>
-	<!--<horizontal pref-height="30">
-		<settings-container pref-width="40">
-			<bool-setting text="" get-event="get" value="left-enabled" />
-			<bool-setting text="" get-event="get" value="right-enabled" />
-		</settings-container>
-	</horizontal>-->
-	<settings-container pref-width="100" pref-height="45" >
-		<color-setting get-event="get" value="left-color" text="Left Arrow" />
-		<color-setting get-event="get" value="right-color" text="Right Arrow" />
-		<bool-setting text="a" get-event="get" value="left-enabled" />
-		<bool-setting text="b" get-event="get" value="right-enabled" />
-	</settings-container>
-	<horizontal pref-width="80" bg="round-rect-panel" background-color="cyan" pad="3" spacing="5">
+	<vertical pref-width="100" background="round-rect-panel" pad="2" background-color="grey">
+		<bool-setting text="Enabled" get-event="get" value="enabled" />
+		<bool-setting text="Custom Left Arrow Glow" get-event="get" value="left-enabled" on-change="left-status-change" />
+		<color-setting active="~left-show" get-event="get" value="left-color" text="      Color" />
+		<bool-setting text="Custom Right Arrow Glow" get-event="get" value="right-enabled" on-change="right-status-change" />
+		<color-setting active="~right-show" get-event="get" value="right-color" text="      Color" />
+	</vertical>
+	<horizontal pref-width="100" bg="round-rect-panel" background-color="cyan" pad="3" spacing="5">
 		<dropdown-list-setting id="dropdown" on-change="load-image" get-event="get-list" value="texture" text="Arrow Glow Texture" options="textures"  />
 		<button text="Help" hover-hint="Import Texture" event-click="show-modal" />
 	</horizontal>
-	<horizontal pref-width="15" pref-height="15" size-delta-y="15" horizontal-fit="PreferredSize" vertical-fit="PreferredSize">
-		<img id="preview" pref-height="15" preserve-aspect="true" />
+	<img id="preview" pref-height="15" preserve-aspect="true" />
+	<horizontal>
+		<button text="Reset" on-click="on-reset" pref-width="30" />
+		<button text="Apply" on-click="on-apply" pref-width="30" />
 	</horizontal>
-	<vertical pref-width="80">
-		<horizontal >
-			<button text="Reset" on-click="on-reset" />
-			<button text="Apply" on-click="on-apply" />
-		</horizontal>
-	</vertical>
 	<modal size-delta-x="70" size-delta-y="30" show-event="show-modal" hide-event="hide-modal" clickerino-offerino-closerino="true">
 		<vertical>
 			<text size-delta-x="40" size-delta-y="3" text="Put images in" align="Center" />

@@ -12,6 +12,7 @@ namespace DiColors.Services
 		private readonly MenuLightsManager _menuLightsManager;
 		private readonly MainFlowCoordinator _mainFlowCoordinator;
 		private readonly CampaignFlowCoordinator _campaignFlowCoordinator;
+		private readonly CenterStageScreenController _centerStageScreenController;
 		private readonly SoloFreePlayFlowCoordinator _soloFreePlayFlowCoordinator;
 		private readonly PartyFreePlayFlowCoordinator _partyFreePlayFlowCoordinator;
 		private readonly Dictionary<Color, SimpleColorSO> _colorDict = new Dictionary<Color, SimpleColorSO>();
@@ -21,12 +22,13 @@ namespace DiColors.Services
 		private MenuLightsPresetSO defaultMenuLights;
 
 		public MenuColorSwapper(Config.Menu menuConfig, MenuLightsManager menuLightsManager, MainFlowCoordinator mainFlowCoordinator, CampaignFlowCoordinator campaignFlowCoordinator,
-								SoloFreePlayFlowCoordinator soloFreePlayFlowCoordinator, PartyFreePlayFlowCoordinator partyFreePlayFlowCoordinator)
+								SoloFreePlayFlowCoordinator soloFreePlayFlowCoordinator, PartyFreePlayFlowCoordinator partyFreePlayFlowCoordinator, CenterStageScreenController centerStageScreenController)
 		{
 			_menuConfig = menuConfig;
 			_menuLightsManager = menuLightsManager;
 			_mainFlowCoordinator = mainFlowCoordinator;
 			_campaignFlowCoordinator = campaignFlowCoordinator;
+			_centerStageScreenController = centerStageScreenController;
 			_soloFreePlayFlowCoordinator = soloFreePlayFlowCoordinator;
 			_partyFreePlayFlowCoordinator = partyFreePlayFlowCoordinator;
 		}
@@ -36,46 +38,15 @@ namespace DiColors.Services
 		public void Initialize()
 		{
 			defaultMenuLights = _menuLightsManager.GetField<MenuLightsPresetSO, MenuLightsManager>("_defaultPreset");
-
-			//ColorSO colorSO = CachedColor(Color.red);
-			
 			var playersPlace = GameObject.Find("PlayersPlace");
 			feetSprite = playersPlace.GetComponentInChildren<SpriteRenderer>();
-			//rectangleFakeGlow = playersPlace.GetComponentInChildren<RectangleFakeGlow>();*/
-
 			UpdateColors(_menuConfig);
-
-			/*
-			MenuLightsPresetSO menuLightsPresetSO = _menuLightsManager.GetField<MenuLightsPresetSO, MenuLightsManager>("_defaultPreset");
-			menuLightsPresetSO.SetField("_playersPlaceNeonsColor", colorSO);
-			var colorPairs = menuLightsPresetSO.GetField<MenuLightsPresetSO.LightIdColorPair[], MenuLightsPresetSO>("_lightIdColorPairs");
-			for (int i = 0; i < colorPairs.Length; i++)
-			{
-				colorPairs[i].SetField("baseColor", colorSO);
-			}
-			_mainFlowCoordinator.SetField("_defaultLightsPreset", menuLightsPresetSO);
-			_campaignFlowCoordinator.SetField("_defaultLightsPreset", menuLightsPresetSO);
-			_soloFreePlayFlowCoordinator.SetField("_defaultLightsPreset", menuLightsPresetSO);
-			_soloFreePlayFlowCoordinator.SetField("_resultsLightsPreset", menuLightsPresetSO);
-			_partyFreePlayFlowCoordinator.SetField("_defaultLightsPreset", menuLightsPresetSO);
-			_partyFreePlayFlowCoordinator.SetField("_resultsLightsPreset", menuLightsPresetSO);*/
 		}
 
 		public void UpdateColors(Config.Menu menuConfig)
 		{
 			var defaultColor = CachedColor(Color);
 			defaultMenuLights = CreateMenuLights(defaultColor);
-			/*if (menuConfig.ColorPairs.TryGetValue("PlayersPlaceBorder", out Config.ColorPair playersBorderColorPair) && playersBorderColorPair.Enabled)
-			{
-				var colorSO = CachedColor(playersBorderColorPair.Color);
-				defaultMenuLights.SetField("_playersPlaceNeonsColor", colorSO);
-				rectangleFakeGlow.color = colorSO.color;
-			}
-			else
-			{
-				defaultMenuLights.SetField("_playersPlaceNeonsColor", defaultColor);
-				rectangleFakeGlow.color = defaultColor.color;
-			}*/
 			if (menuConfig.ColorPairs.TryGetValue("PlayersPlaceFeet", out Config.ColorPair playersFeetColorPair))
 			{
 				feetSprite.color = playersFeetColorPair.Enabled ? playersFeetColorPair.Color : defaultColor.color;
@@ -120,8 +91,24 @@ namespace DiColors.Services
 					_campaignFlowCoordinator.SetField("_defaultLightsPreset", defaultMenuLights);
 				} 
 			}
+			_centerStageScreenController.SetField("_defaultMenuLightsPreset", defaultMenuLights);
+			if (menuConfig.ColorPairs.TryGetValue("Multiplayer", out Config.ColorPair multiplayer))
+			{
+				if (multiplayer.Enabled)
+				{
+					var lights = CreateMenuLights(multiplayer.Color);
+					_centerStageScreenController.SetField("_lobbyLightsPreset", lights);
+				}
+			}
+			if (menuConfig.ColorPairs.TryGetValue("MultiplayerCountdown", out Config.ColorPair multiplayerCountdown))
+			{
+				if (multiplayerCountdown.Enabled)
+				{
+					var lights = CreateMenuLights(multiplayerCountdown.Color);
+					_centerStageScreenController.SetField("_countdownMenuLightsPreset", lights);
+				}
+			}
 			_mainFlowCoordinator.SetField("_defaultLightsPreset", defaultMenuLights);
-			//_campaignFlowCoordinator.SetField("_defaultLightsPreset", defaultMenuLights);
 		}
 
 		public MenuLightsPresetSO CreateMenuLights(Color color)
@@ -160,10 +147,10 @@ namespace DiColors.Services
 
 		public void SetColor(Color color)
 		{
-			for (int i = 0; i < defaultMenuLights.lightIdColorPairs.Length; i++)
-			{
-				_menuLightsManager.SetColor(i, color);
-			}
+			defaultMenuLights = _menuLightsManager.GetField<MenuLightsPresetSO, MenuLightsManager>("_defaultPreset");
+			_menuLightsManager?.SetColorPreset(CreateMenuLights(color), true);
+			_menuLightsManager?.RefreshColors();
+
 		}
 	}
 }

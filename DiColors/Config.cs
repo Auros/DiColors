@@ -1,4 +1,6 @@
+using SemVer;
 using UnityEngine;
+using SiraUtil.Converters;
 using System.Collections.Generic;
 using IPA.Config.Stores.Attributes;
 using IPA.Config.Stores.Converters;
@@ -10,6 +12,9 @@ namespace DiColors
 		/*public virtual string SelectedProfile { get; set; }
 
 		public virtual string Name { get; set; } = "Default";*/
+
+		[NonNullable, UseConverter(typeof(VersionConverter))]
+		public virtual Version Version { get; set; } = new Version("1.0.0");
 
 		[NonNullable]
 		public virtual Game GameSettings { get; set; } = new Game();
@@ -51,16 +56,20 @@ namespace DiColors
 			public virtual bool Enabled { get; set; }
 
 			[UseConverter(typeof(HexColorConverter))]
-			public virtual Color DefaultColor { get; set; }
+			public virtual Color DefaultColor { get; set; } = Color.cyan;
 
 			[NonNullable, UseConverter(typeof(DictionaryConverter<ColorPair>))]
 			public virtual Dictionary<string, ColorPair> ColorPairs { get; set; } = new Dictionary<string, ColorPair>
 			{
 				{ "Freeplay", new ColorPair() },
 				{ "Results", new ColorPair() },
+				{ "ResultsFail", new ColorPair() },
 				{ "Campaigns", new ColorPair() },
-				{ "PlayersPlaceBorder", new ColorPair() },
 				{ "PlayersPlaceFeet", new ColorPair() },
+				{ "Multiplayer", new ColorPair() },
+				{ "MultiplayerCountdown", new ColorPair() },
+				{ "Beat", new ColorPair() },
+				{ "Saber", new ColorPair() }
 			};
 		}
 
@@ -69,7 +78,7 @@ namespace DiColors
 			public virtual bool Enabled { get; set; }
 
 			[UseConverter(typeof(HexColorConverter))]
-			public virtual Color Color { get; set; }
+			public virtual Color Color { get; set; } = Color.white;
 		}
 	}
 }

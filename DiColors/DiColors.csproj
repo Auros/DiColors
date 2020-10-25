@@ -131,6 +131,11 @@
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
@@ -172,6 +177,7 @@
     <Compile Include="Services\MenuColorSwapper.cs" />
     <Compile Include="Services\NoteArrowColorChanger.cs" />
     <Compile Include="Services\ProfileManager.cs" />
+    <Compile Include="Services\SignColorSwapper.cs" />
     <Compile Include="ViewControllers\DiColorsGameColorView.cs" />
     <Compile Include="ViewControllers\DiColorsInfoView.cs" />
     <Compile Include="ViewControllers\DiColorsMenuColorView.cs" />

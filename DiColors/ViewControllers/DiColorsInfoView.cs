@@ -8,6 +8,7 @@ using SiraUtil;
 
 namespace DiColors.ViewControllers
 {
+	[ViewDefinition("DiColors.Views.info-view.bsml")]
 	[HotReload(RelativePathToLayout = @"..\Views\info-view.bsml")]
 	public class DiColorsInfoView : BSMLAutomaticViewController
 	{
@@ -63,7 +64,6 @@ namespace DiColors.ViewControllers
 		[Inject]
 		public void Construct([Inject(Id = "DiColors.Version")] Version version)
 		{
-			Plugin.Log.NullCheck(version);
 			Version = $"v{version}";
 		}
 

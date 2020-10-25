@@ -3,7 +3,6 @@ using Zenject;
 using System.Threading;
 using System.Threading.Tasks;
 using BeatSaberMarkupLanguage;
-using DiColors.ViewControllers;
 using BeatSaberMarkupLanguage.MenuButtons;
 
 namespace DiColors.Services
@@ -11,8 +10,8 @@ namespace DiColors.Services
 	public class MenuButtonManager : IInitializable, IDisposable
 	{
 		private readonly MenuButton menuButton;
-		private MainFlowCoordinator _mainFlowCoordinator;
-		private DiColorsFlowCoordinator _diColorsFlowCoordinator;
+		private readonly MainFlowCoordinator _mainFlowCoordinator;
+		private readonly DiColorsFlowCoordinator _diColorsFlowCoordinator;
 
 		public MenuButtonManager(MainFlowCoordinator mainFlowCoordinator, DiColorsFlowCoordinator diColorsFlowCoordinator)
 		{
@@ -31,7 +30,7 @@ namespace DiColors.Services
 		{
 			if (MenuButtons.IsSingletonAvailable)
 			{
-				MenuButtons.instance?.UnregisterButton(menuButton);
+				MenuButtons.instance.UnregisterButton(menuButton);
 			}
 		}
 
