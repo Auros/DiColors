@@ -9,15 +9,17 @@
         <bool-setting text="Custom Right Arrow Glow" get-event="get" value="right-enabled" on-change="right-status-change" />
         <color-setting active="~right-show" get-event="get" value="right-color" text="      Color" />
     </vertical>
-    <horizontal pref-width="100" bg="round-rect-panel" background-color="cyan" pad="3" spacing="5">
-        <dropdown-list-setting id="dropdown" on-change="load-image" get-event="get-list" value="texture" text="Arrow Glow Texture" options="textures"  />
-        <button text="Help" hover-hint="Import Texture" event-click="show-modal" />
-    </horizontal>
-    <img id="preview" pref-height="15" preserve-aspect="true" />
+	<horizontal spacing="2">
+		<horizontal pref-width="80" bg="round-rect-panel" background-color="cyan" pad="3" spacing="5">
+			<dropdown-list-setting id="dropdown" on-change="load-image" get-event="get-list" value="texture" text="Arrow Glow Texture" options="textures"  />
+			<button text="Help" hover-hint="Import Texture" event-click="show-modal" />
+		</horizontal>
+		<img id="preview" pref-height="15" preserve-aspect="true" />
+	</horizontal>
     <horizontal>
-        <button text="Reset" on-click="on-reset" pref-width="30" />
-        <button text="Apply" on-click="on-apply" pref-width="30" />
-    </horizontal>
+			<button text="Reset" on-click="on-reset" pref-width="30" />
+			<button text="Apply" on-click="on-apply" pref-width="30" />
+		</horizontal>
     <modal size-delta-x="70" size-delta-y="30" show-event="show-modal" hide-event="hide-modal" clickerino-offerino-closerino="true">
         <vertical>
             <text size-delta-x="40" size-delta-y="3" text="Put images in" align="Center" />
