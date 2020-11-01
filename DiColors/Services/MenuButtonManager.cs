@@ -28,7 +28,7 @@ namespace DiColors.Services
 
         public void Dispose()
         {
-            if (MenuButtons.IsSingletonAvailable)
+            if (BSMLParser.IsSingletonAvailable && MenuButtons.IsSingletonAvailable)
             {
                 MenuButtons.instance.UnregisterButton(menuButton);
             }

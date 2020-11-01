@@ -1,5 +1,5 @@
 <vertical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-    <horizontal bg="panel-top-gradient" bg-color="#8753b8" pref-width="100" horizontal-fit="PreferredSize">
+    <horizontal pref-width="100" horizontal-fit="PreferredSize">
         <text text="Menu Settings" align="Center" font-size="7" />
         <tab-selector tab-tag="yo" />
     </horizontal>
