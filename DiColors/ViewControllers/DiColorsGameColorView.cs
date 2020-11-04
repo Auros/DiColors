@@ -21,7 +21,7 @@ namespace DiColors.ViewControllers
         private Config.Game _gameConfig;
         private Config.Game _stashedConfig;
         private CachedMediaAsyncLoader _mediaLoader;
-		private ArrowDecoratorProvider _arrowDecorator;
+        private ArrowDecoratorProvider _arrowDecorator;
         private CancellationTokenSource _cancellationToken;
 
         [UIValue("textures")]
@@ -128,8 +128,8 @@ namespace DiColors.ViewControllers
         {
             _gameConfig = gameConfig;
             _mediaLoader = mediaLoader;
-			_stashedConfig = _gameConfig.Copy();
-			_arrowDecorator = arrowDecoratorProvider;
+            _stashedConfig = _gameConfig.Copy();
+            _arrowDecorator = arrowDecoratorProvider;
             
             Directory.CreateDirectory(Constants.FOLDERDIR);
             Directory.CreateDirectory(Constants.TEXTUREDIR);
@@ -201,8 +201,8 @@ namespace DiColors.ViewControllers
                 dropdown.values = textureOptions;
                 dropdown?.UpdateChoices();
             }
-			_arrowDecorator.Priority = !_gameConfig.Enabled || _gameConfig.ArrowTexture == "Default" ? -1 : 350;
-		}
+            _arrowDecorator.Priority = !_gameConfig.Enabled || _gameConfig.ArrowTexture == "Default" ? -1 : 350;
+        }
 
         private void Apply(Config.Game toApplyTo, Config.Game donor)
         {

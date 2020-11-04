@@ -5,7 +5,7 @@ using SiraUtil.Interfaces;
 
 namespace DiColors.Installers
 {
-	public class DiCInstaller : Installer<Config, Version, DiCInstaller>
+    public class DiCInstaller : Installer<Config, Version, DiCInstaller>
     {
         private readonly Config _config;
         private readonly Version _version;
@@ -23,12 +23,12 @@ namespace DiColors.Installers
             Container.Bind<Config.Game>().FromInstance(_config.GameSettings).AsSingle();
             Container.Bind<Version>().WithId("DiColors.Version").FromInstance(_version).AsCached();
 
-			Container.Bind(typeof(IModelProvider), typeof(ArrowDecoratorProvider)).To<ArrowDecoratorProvider>().AsSingle();
+            Container.Bind(typeof(IModelProvider), typeof(ArrowDecoratorProvider)).To<ArrowDecoratorProvider>().AsSingle();
 
-			if (!_config.GameSettings.Enabled || _config.GameSettings.ArrowTexture == "Default")
-			{
-				Container.Resolve<ArrowDecoratorProvider>().Priority = -1;
-			}
+            if (!_config.GameSettings.Enabled || _config.GameSettings.ArrowTexture == "Default")
+            {
+                Container.Resolve<ArrowDecoratorProvider>().Priority = -1;
+            }
         }
     }
 }
