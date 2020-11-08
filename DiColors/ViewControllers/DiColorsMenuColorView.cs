@@ -239,6 +239,7 @@ namespace DiColors.ViewControllers
             Apply(_menuConfig, _stashedConfig);
             _colorSwapper.UpdateColors(_stashedConfig);
             parserParams.EmitEvent("get");
+            parserParams.EmitEvent("get-list");
         }
 
         [UIAction("on-apply")]
@@ -255,6 +256,7 @@ namespace DiColors.ViewControllers
             toApplyTo.Enabled = donor.Enabled;
             toApplyTo.ColorPairs = donor.ColorPairs;
             toApplyTo.DefaultColor = donor.DefaultColor;
+			toApplyTo.SaveIt();
         }
     }
 }

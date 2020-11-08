@@ -2,11 +2,10 @@ using HMUI;
 using Zenject;
 using BeatSaberMarkupLanguage;
 using DiColors.ViewControllers;
-using UnityEngine.EventSystems;
 
 namespace DiColors
 {
-    public class DiColorsFlowCoordinator : FlowCoordinator
+	public class DiColorsFlowCoordinator : FlowCoordinator
     {
         private DiColorsInfoView _infoView;
         private DiColorsMenuColorView _menuColorView;
@@ -29,8 +28,11 @@ namespace DiColors
             {
                 SetTitle("DiColors");
                 showBackButton = true;
+
+				ProvideInitialViewControllers(_infoView, _menuColorView, _gameColorView/*, _profileView*/);
             }
-            ProvideInitialViewControllers(_infoView, _menuColorView, _gameColorView/*, _profileView*/);
+			SetLeftScreenViewController(_menuColorView, ViewController.AnimationType.In);
+			SetRightScreenViewController(_gameColorView, ViewController.AnimationType.In);
         }
 
         protected override void BackButtonWasPressed(ViewController topViewController)

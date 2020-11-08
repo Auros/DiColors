@@ -17,9 +17,9 @@
         <img id="preview" pref-height="15" preserve-aspect="true" />
     </horizontal>
     <horizontal>
-            <button text="Reset" on-click="on-reset" pref-width="30" />
-            <button text="Apply" on-click="on-apply" pref-width="30" />
-        </horizontal>
+        <button text="Reset" on-click="on-reset" pref-width="30" />
+        <button text="Apply" on-click="on-apply" pref-width="30" />
+    </horizontal>
     <modal size-delta-x="70" size-delta-y="30" show-event="show-modal" hide-event="hide-modal" clickerino-offerino-closerino="true">
         <vertical>
             <text size-delta-x="40" size-delta-y="3" text="Put images in" align="Center" />

@@ -26,7 +26,7 @@ namespace DiColors
 
             zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.Version);
             zenjector.OnMenu<DiCMenuInstaller>().Expose<FlickeringNeonSign>();
-            zenjector.OnGame<DiCGameInstaller>().ShortCircuitForMultiplayer();
+            zenjector.OnGame<DiCGameInstaller>(false);
         }
 
         [OnEnable]

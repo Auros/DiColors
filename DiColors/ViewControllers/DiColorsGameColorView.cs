@@ -212,6 +212,8 @@ namespace DiColors.ViewControllers
             toApplyTo.UseRightColor = donor.UseRightColor;
             toApplyTo.LeftArrowColor = donor.LeftArrowColor;
             toApplyTo.RightArrowColor = donor.RightArrowColor;
+
+			toApplyTo.SaveIt();
         }
 
         protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
@@ -220,6 +222,8 @@ namespace DiColors.ViewControllers
             _cancellationToken = new CancellationTokenSource();
             LeftShow = _gameConfig.UseLeftColor;
             RightShow = _gameConfig.UseRightColor;
+
+			parserParams?.EmitEvent("get");
         }
 
         protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)

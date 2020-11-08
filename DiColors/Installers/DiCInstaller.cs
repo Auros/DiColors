@@ -18,6 +18,9 @@ namespace DiColors.Installers
 
         public override void InstallBindings()
         {
+			_config.MenuSettings.Config = _config;
+			_config.GameSettings.Config = _config;
+
             Container.Bind<Config>().FromInstance(_config).AsSingle();
             Container.Bind<Config.Menu>().FromInstance(_config.MenuSettings).AsSingle();
             Container.Bind<Config.Game>().FromInstance(_config.GameSettings).AsSingle();

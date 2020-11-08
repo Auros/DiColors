@@ -16,15 +16,25 @@ namespace DiColors
         [NonNullable, UseConverter(typeof(VersionConverter))]
         public Version Version { get; set; } = new Version("1.0.0");
 
-        [NonNullable]
-        public Game GameSettings { get; set; } = new Game();
+		[NonNullable]
+		public Game GameSettings { get; set; } = new Game();
 
-        [NonNullable]
-        public Menu MenuSettings { get; set; } = new Menu();
+		[NonNullable]
+		public Menu MenuSettings { get; set; } = new Menu();
 
-        public class Game
-        {
-            public bool Enabled { get; set; }
+		public virtual void Changed() { /* Force BSIPA to Save */ }
+
+		public class Game
+		{
+			[Ignore]
+			public Config Config { get; internal set; }
+
+			public void SaveIt()
+			{
+				Config.Changed();
+			}
+
+			public bool Enabled { get; set; }
 
             public string ArrowTexture { get; set; } = "Default";
 
@@ -40,7 +50,15 @@ namespace DiColors
         }
 
         public class Menu
-        {
+		{
+			[Ignore]
+			public Config Config { get; internal set; }
+
+			public void SaveIt()
+			{
+				Config.Changed();
+			}
+
             public bool Enabled { get; set; }
 
             [UseConverter(typeof(HexColorConverter))]
