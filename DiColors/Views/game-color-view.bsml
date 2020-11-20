@@ -23,7 +23,7 @@
     <modal size-delta-x="70" size-delta-y="30" show-event="show-modal" hide-event="hide-modal" clickerino-offerino-closerino="true">
         <vertical>
             <text size-delta-x="40" size-delta-y="3" text="Put images in" align="Center" />
-            <text size-delta-x="40" size-delta-y="3" text="Beat Saber/UserData/DiColors/Textures/" align="Center" />
+            <text size-delta-x="40" size-delta-y="3" text="Beat Saber/UserData/Di/Colors/Textures/" align="Center" />
             <text size-delta-x="40" size-delta-y="3" text="Recommended Resolution: 256x128" align="Center" font-size="3" />
             <button event-click="hide-modal" text="OK" on-click="reload" />
         </vertical>
