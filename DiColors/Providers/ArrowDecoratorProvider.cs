@@ -24,7 +24,6 @@ namespace DiColors.Providers
             {
                 _gameConfig = gameConfig;
             }
-
             public GameNoteController Modify(GameNoteController original)
             {
                 var cnv = original.GetComponent<ColorNoteVisuals>();
