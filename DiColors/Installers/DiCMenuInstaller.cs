@@ -13,10 +13,10 @@ namespace DiColors.Installers
             Container.Bind(typeof(IInitializable), typeof(SignColorSwapper)).To<SignColorSwapper>().AsSingle();
 
             // UI
-            Container.BindViewController<DiColorsInfoView>();
-            Container.BindViewController<DiColorsMenuColorView>();
-            Container.BindViewController<DiColorsGameColorView>();
-            Container.BindFlowCoordinator<DiColorsFlowCoordinator>();
+            Container.Bind<DiColorsInfoView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<DiColorsMenuColorView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<DiColorsGameColorView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<DiColorsFlowCoordinator>().FromNewComponentOnNewGameObject(nameof(DiColorsFlowCoordinator)).AsSingle();
             Container.BindInterfacesTo<MenuButtonManager>().AsSingle();
         }
     }
