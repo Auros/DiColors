@@ -9,8 +9,10 @@ namespace DiColors.Services
         private SpriteRenderer _eLogo;
         private SpriteRenderer _batLogo;
         private SpriteRenderer _saberLogo;
+        private TubeBloomPrePassLight _bNeon;
         private TubeBloomPrePassLight _eNeon;
-        private TubeBloomPrePassLight _batNeon;
+        private TubeBloomPrePassLight _aNeon;
+        private TubeBloomPrePassLight _tNeon;
         private TubeBloomPrePassLight _saberNeon;
         private readonly FlickeringNeonSign _flickeringNeonSign;
         private readonly Config.Menu _config;
@@ -45,8 +47,14 @@ namespace DiColors.Services
             {
                 switch (light.gameObject.name)
                 {
-                    case "BATNeon":
-                        _batNeon = light;
+                    case "BNeon":
+                        _bNeon = light;
+						break;
+					case "ANeon":
+                        _aNeon = light;
+						break;
+					case "TNeon":
+                        _tNeon = light;
                         break;
                     case "SaberNeon":
                         _saberNeon = light;
@@ -55,10 +63,12 @@ namespace DiColors.Services
             }
             if (_config.ColorPairs.TryGetValue("Beat", out Config.ColorPair beatPair) && beatPair.Enabled)
             {
+                _batLogo.color = beatPair.Color;
                 _eLogo.color = beatPair.Color;
                 _eNeon.color = beatPair.Color;
-                _batLogo.color = beatPair.Color;
-                _batNeon.color = beatPair.Color;
+                _bNeon.color = beatPair.Color;
+                _aNeon.color = beatPair.Color;
+                _tNeon.color = beatPair.Color;
                 _flickeringNeonSign.SetField("_lightOnColor", beatPair.Color);
                 _flickeringNeonSign.SetField("_spriteOnColor", beatPair.Color);
                 var pss = _flickeringNeonSign.gameObject.GetComponentsInChildren<ParticleSystem>();
