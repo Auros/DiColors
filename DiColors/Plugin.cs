@@ -25,8 +25,8 @@ namespace DiColors
             config.Version = metadata.Version;
 
             zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.Version);
-            zenjector.OnMenu<DiCMenuInstaller>().Expose<FlickeringNeonSign>();
             zenjector.OnGame<DiCGameInstaller>(false);
+			zenjector.OnMenu<DiCMenuInstaller>();
         }
 
         [OnEnable]
