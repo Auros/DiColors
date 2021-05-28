@@ -25,7 +25,7 @@ namespace DiColors
             config.Version = metadata.Version;
 
             zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.Version);
-            zenjector.OnGame<DiCGameInstaller>(false);
+            //zenjector.OnGame<DiCGameInstaller>(false);
 			zenjector.OnMenu<DiCMenuInstaller>();
         }
 

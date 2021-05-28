@@ -8,10 +8,8 @@ namespace DiColors.Services
 {
     public class NoteArrowColorChanger : IInitializable, IDisposable
     {
-        private static readonly FieldAccessor<ColorNoteVisuals, float>.Accessor VisualsGlowIntensity = FieldAccessor<ColorNoteVisuals, float>.GetAccessor("_arrowGlowIntensity");
-        private static readonly FieldAccessor<ColorNoteVisuals, MeshRenderer>.Accessor VisualsArrowMesh = FieldAccessor<ColorNoteVisuals, MeshRenderer>.GetAccessor("_arrowMeshRenderer");
-        private static readonly FieldAccessor<ColorNoteVisuals, SpriteRenderer>.Accessor VisualsArrowSprite = FieldAccessor<ColorNoteVisuals, SpriteRenderer>.GetAccessor("_arrowGlowSpriteRenderer");
-        private static readonly FieldAccessor<ColorNoteVisuals, SpriteRenderer>.Accessor VisualsCircleSprite = FieldAccessor<ColorNoteVisuals, SpriteRenderer>.GetAccessor("_circleGlowSpriteRenderer");
+        private static readonly FieldAccessor<ColorNoteVisuals, MeshRenderer[]>.Accessor VisualsArrowMeshes = FieldAccessor<ColorNoteVisuals, MeshRenderer[]>.GetAccessor("_arrowMeshRenderers");
+        private static readonly FieldAccessor<ColorNoteVisuals, MeshRenderer[]>.Accessor VisualsCircleMeshes = FieldAccessor<ColorNoteVisuals, MeshRenderer[]>.GetAccessor("_arrowMeshRenderers");
 
         private readonly Config.Game _gameConfig;
         private readonly BeatmapObjectManager _beatmapObjectManager;
@@ -50,9 +48,14 @@ namespace DiColors.Services
                     return;
                 }
                 Color dynamicColor = gameNoteController.noteData.colorType == ColorType.ColorA ? _gameConfig.LeftArrowColor : _gameConfig.RightArrowColor;
-                float intensity = VisualsGlowIntensity(ref cnv);
-                VisualsArrowSprite(ref cnv).color = dynamicColor.ColorWithAlpha(intensity);
-                VisualsCircleSprite(ref cnv).color = dynamicColor.ColorWithAlpha(intensity);
+				foreach (var mesh in VisualsArrowMeshes(ref cnv))
+				{
+					mesh.material.color = dynamicColor;
+				}
+				foreach (var mesh in VisualsCircleMeshes(ref cnv))
+				{
+					mesh.material.color = dynamicColor;
+				}
             }
         }
 

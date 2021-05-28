@@ -29,10 +29,10 @@ namespace DiColors
                 SetTitle("DiColors");
                 showBackButton = true;
 
-				ProvideInitialViewControllers(_infoView, _menuColorView, _gameColorView/*, _profileView*/);
+				ProvideInitialViewControllers(_infoView, _menuColorView /*_gameColorView, _profileView*/);
             }
 			SetLeftScreenViewController(_menuColorView, ViewController.AnimationType.In);
-			SetRightScreenViewController(_gameColorView, ViewController.AnimationType.In);
+			//SetRightScreenViewController(_gameColorView, ViewController.AnimationType.In);
         }
 
         protected override void BackButtonWasPressed(ViewController topViewController)
