@@ -173,7 +173,6 @@
     <Compile Include="Installers\DiCMenuInstaller.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\ArrowDecoratorProvider.cs" />
     <Compile Include="Services\MenuButtonManager.cs" />
     <Compile Include="Services\MenuColorSwapper.cs" />
     <Compile Include="Services\NoteArrowColorChanger.cs" />
@@ -203,6 +202,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Providers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

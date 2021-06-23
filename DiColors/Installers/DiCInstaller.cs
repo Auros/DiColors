@@ -1,6 +1,5 @@
 using SemVer;
 using Zenject;
-using DiColors.Providers;
 using SiraUtil.Interfaces;
 
 namespace DiColors.Installers
@@ -25,13 +24,6 @@ namespace DiColors.Installers
             Container.Bind<Config.Menu>().FromInstance(_config.MenuSettings).AsSingle();
             Container.Bind<Config.Game>().FromInstance(_config.GameSettings).AsSingle();
             Container.Bind<Version>().WithId("DiColors.Version").FromInstance(_version).AsCached();
-
-            Container.Bind(typeof(IModelProvider), typeof(ArrowDecoratorProvider)).To<ArrowDecoratorProvider>().AsSingle();
-
-            if (!_config.GameSettings.Enabled || _config.GameSettings.ArrowTexture == "Default")
-            {
-                Container.Resolve<ArrowDecoratorProvider>().Priority = -1;
-            }
         }
     }
 }

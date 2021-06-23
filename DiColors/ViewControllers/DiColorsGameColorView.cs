@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading;
-using DiColors.Providers;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using BeatSaberMarkupLanguage.Parser;
@@ -21,7 +20,6 @@ namespace DiColors.ViewControllers
         private Config.Game _gameConfig;
         private Config.Game _stashedConfig;
         private CachedMediaAsyncLoader _mediaLoader;
-        private ArrowDecoratorProvider _arrowDecorator;
         private CancellationTokenSource _cancellationToken;
 
         [UIValue("textures")]
@@ -124,12 +122,11 @@ namespace DiColors.ViewControllers
         }
 
         [Inject]
-        internal async void Construct(Config.Game gameConfig, ArrowDecoratorProvider arrowDecoratorProvider, CachedMediaAsyncLoader mediaLoader)
+        internal async void Construct(Config.Game gameConfig, CachedMediaAsyncLoader mediaLoader)
         {
             _gameConfig = gameConfig;
             _mediaLoader = mediaLoader;
             _stashedConfig = _gameConfig.Copy();
-            _arrowDecorator = arrowDecoratorProvider;
             
             Directory.CreateDirectory(Constants.FOLDERDIR);
             Directory.CreateDirectory(Constants.TEXTUREDIR);
@@ -201,7 +198,6 @@ namespace DiColors.ViewControllers
                 dropdown.values = textureOptions;
                 dropdown?.UpdateChoices();
             }
-            _arrowDecorator.Priority = !_gameConfig.Enabled || _gameConfig.ArrowTexture == "Default" ? -1 : 350;
         }
 
         private void Apply(Config.Game toApplyTo, Config.Game donor)
