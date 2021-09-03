@@ -22,9 +22,9 @@ namespace DiColors
             Log = logger;
             Config config = conf.Generated<Config>();
             _harmony = new Harmony("dev.auros.dicolors");
-            config.Version = metadata.Version;
+            config.Version = metadata.HVersion;
 
-            zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.Version);
+            zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.HVersion);
             //zenjector.OnGame<DiCGameInstaller>(false);
 			zenjector.OnMenu<DiCMenuInstaller>();
         }

@@ -1,10 +1,9 @@
-using SemVer;
+using Version = Hive.Versioning.Version;
 using Zenject;
-using SiraUtil.Interfaces;
 
 namespace DiColors.Installers
 {
-    public class DiCInstaller : Installer<Config, Version, DiCInstaller>
+	public class DiCInstaller : Installer<Config, Version, DiCInstaller>
     {
         private readonly Config _config;
         private readonly Version _version;

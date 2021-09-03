@@ -1,19 +1,19 @@
-using SemVer;
-using UnityEngine;
-using SiraUtil.Converters;
 using System.Collections.Generic;
 using IPA.Config.Stores.Attributes;
 using IPA.Config.Stores.Converters;
+using SiraUtil.Converters;
+using UnityEngine;
+using Version = Hive.Versioning.Version;
 
 namespace DiColors
 {
-    public class Config
+	public class Config
     {
         /*public virtual string SelectedProfile { get; set; }
 
         public virtual string Name { get; set; } = "Default";*/
 
-        [NonNullable, UseConverter(typeof(VersionConverter))]
+        [NonNullable, UseConverter(typeof(HiveVersionConverter))]
         public Version Version { get; set; } = new Version("1.0.0");
 
 		[NonNullable]

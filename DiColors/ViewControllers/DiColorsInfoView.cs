@@ -1,14 +1,13 @@
-using TMPro;
-using SemVer;
-using Zenject;
-using UnityEngine;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
-using SiraUtil;
+using TMPro;
+using UnityEngine;
+using Zenject;
+using Version = Hive.Versioning.Version;
 
 namespace DiColors.ViewControllers
 {
-    [ViewDefinition("DiColors.Views.info-view.bsml")]
+	[ViewDefinition("DiColors.Views.info-view.bsml")]
     [HotReload(RelativePathToLayout = @"..\Views\info-view.bsml")]
     public class DiColorsInfoView : BSMLAutomaticViewController
     {
