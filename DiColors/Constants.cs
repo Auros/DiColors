@@ -8,7 +8,8 @@ namespace DiColors
 {
     internal static class Constants
     {
-        internal const string AUROSDEV = "https://donate.auros.dev";
+		internal const string HERMANESTUPD = "https://github.com/Hermanest";
+        internal const string AUROSDEV = "https://github.com/Auros";
         internal const string LATESTRELEASE = "https://github.com/Auros/DiColors/releases/latest";
         internal static readonly string FOLDERDIR = Path.Combine(UnityGame.UserDataPath, "Di", "Colors");
         internal static readonly string PROFILEDIR = Path.Combine(FOLDERDIR, "Profiles");

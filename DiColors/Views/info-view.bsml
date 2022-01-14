@@ -8,5 +8,6 @@
     <horizontal pad="2" pref-width="50" anchor-pos-y="-30" anchor-pos-x="15">
         <text id="version-text" text="~version" align="Center" />
         <clickable-text id="secondary-text" text="~secondary" on-click="secondary-clicked" align="Center" hover-hint="Opens Link In Browser" />
+		<clickable-text id="secondary-text-upd" text="updated by Hermanest" on-click="secondary-upd-clicked" align="Center" hover-hint="Opens Link In Browser" />
     </horizontal>
 </vertical>

@@ -72,5 +72,11 @@ namespace DiColors.ViewControllers
             var url = UpdateAvailable ? Constants.LATESTRELEASE : Constants.AUROSDEV;
             Application.OpenURL(url);
         }
+		[UIAction("secondary-upd-clicked")]
+		protected void SecondaryUpdClicked()
+		{
+			var url = UpdateAvailable ? Constants.LATESTRELEASE : Constants.HERMANESTUPD;
+			Application.OpenURL(url);
+		}
     }
 }
