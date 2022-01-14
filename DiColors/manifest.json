@@ -7,8 +7,8 @@
   "description": "A mod which allows you to change the color of various things including the note arrow color, brightness, and menu lights.",
   "gameVersion": "1.17.0",
   "dependsOn": {
-    "BSIPA": "^4.0.0",
-    "SiraUtil": "^2.3.1",
-    "BeatSaberMarkupLanguage": "^1.4.0"
+    "BSIPA": "^4.2.1",
+    "SiraUtil": "^3.0.3",
+    "BeatSaberMarkupLanguage": "^1.6.1"
   }
 }

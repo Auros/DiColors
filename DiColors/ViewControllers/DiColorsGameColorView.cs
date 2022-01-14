@@ -19,7 +19,7 @@ namespace DiColors.ViewControllers
     {
         private Config.Game _gameConfig;
         private Config.Game _stashedConfig;
-        private CachedMediaAsyncLoader _mediaLoader;
+		private CachedMediaAsyncLoader _mediaLoader;
         private CancellationTokenSource _cancellationToken;
 
         [UIValue("textures")]

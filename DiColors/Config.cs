@@ -13,9 +13,6 @@ namespace DiColors
 
         public virtual string Name { get; set; } = "Default";*/
 
-        [NonNullable, UseConverter(typeof(HiveVersionConverter))]
-        public Version Version { get; set; } = new Version("1.0.0");
-
 		[NonNullable]
 		public Game GameSettings { get; set; } = new Game();
 
