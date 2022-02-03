@@ -24,9 +24,9 @@ namespace DiColors
             _harmony = new Harmony("dev.auros.dicolors");
             config.Version = metadata.HVersion;
 
-            zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.HVersion);
+			zenjector.Install<DiCInstaller>(Location.App, config, metadata.HVersion);
+			zenjector.Install<DiCMenuInstaller>(Location.Menu);
             //zenjector.OnGame<DiCGameInstaller>(false);
-			zenjector.OnMenu<DiCMenuInstaller>();
         }
 
         [OnEnable]
@@ -38,7 +38,7 @@ namespace DiColors
         [OnDisable]
         public void OnDisable()
         {
-            _harmony.UnpatchAll("dev.auros.dicolors");
+            _harmony.UnpatchSelf();
         }
     }
 }
