@@ -1,6 +1,7 @@
 using Zenject;
 using UnityEngine;
 using DiColors.Services;
+using System.Threading.Tasks;
 using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
@@ -247,7 +248,7 @@ namespace DiColors.ViewControllers
         {
             parserParams.EmitEvent("apply");
             _fader.FadeOut();
-            await SiraUtil.Utilities.AwaitSleep(500);
+            await Task.Delay(500);
             _transitioner.RestartGame();
         }
 

@@ -6,36 +6,39 @@ using System.Collections.Generic;
 
 namespace DiColors.Services
 {
-    public class MenuColorSwapper : IInitializable, IColorable
-    {
-        private readonly Config.Menu _menuConfig;
-        private readonly MenuLightsManager _menuLightsManager;
-        private readonly MainFlowCoordinator _mainFlowCoordinator;
-        private readonly CampaignFlowCoordinator _campaignFlowCoordinator;
-        private readonly CenterStageScreenController _centerStageScreenController;
-        private readonly SoloFreePlayFlowCoordinator _soloFreePlayFlowCoordinator;
-        private readonly PartyFreePlayFlowCoordinator _partyFreePlayFlowCoordinator;
-        private readonly Dictionary<Color, SimpleColorSO> _colorDict = new Dictionary<Color, SimpleColorSO>();
-        private readonly Dictionary<Color, MenuLightsPresetSO> _lightsDict = new Dictionary<Color, MenuLightsPresetSO>();
+	public class MenuColorSwapper : IInitializable, IColorable
+	{
+		private readonly Config.Menu _menuConfig;
+		private readonly MenuLightsManager _menuLightsManager;
+		private readonly MainFlowCoordinator _mainFlowCoordinator;
+		private readonly CampaignFlowCoordinator _campaignFlowCoordinator;
+		private readonly CenterStageScreenController _centerStageScreenController;
+		private readonly SoloFreePlayFlowCoordinator _soloFreePlayFlowCoordinator;
+		private readonly PartyFreePlayFlowCoordinator _partyFreePlayFlowCoordinator;
+		private readonly Dictionary<Color, SimpleColorSO> _colorDict = new Dictionary<Color, SimpleColorSO>();
+		private readonly Dictionary<Color, MenuLightsPresetSO> _lightsDict = new Dictionary<Color, MenuLightsPresetSO>();
 
-        private SpriteRenderer feetSprite;
-        private MenuLightsPresetSO defaultMenuLights;
+		private SpriteRenderer feetSprite;
+		private MenuLightsPresetSO defaultMenuLights;
 
-        public MenuColorSwapper(Config.Menu menuConfig, MenuLightsManager menuLightsManager, MainFlowCoordinator mainFlowCoordinator, CampaignFlowCoordinator campaignFlowCoordinator,
-                                SoloFreePlayFlowCoordinator soloFreePlayFlowCoordinator, PartyFreePlayFlowCoordinator partyFreePlayFlowCoordinator, CenterStageScreenController centerStageScreenController)
-        {
-            _menuConfig = menuConfig;
-            _menuLightsManager = menuLightsManager;
-            _mainFlowCoordinator = mainFlowCoordinator;
-            _campaignFlowCoordinator = campaignFlowCoordinator;
-            _centerStageScreenController = centerStageScreenController;
-            _soloFreePlayFlowCoordinator = soloFreePlayFlowCoordinator;
-            _partyFreePlayFlowCoordinator = partyFreePlayFlowCoordinator;
-        }
+		public MenuColorSwapper(Config.Menu menuConfig, MenuLightsManager menuLightsManager, MainFlowCoordinator mainFlowCoordinator, CampaignFlowCoordinator campaignFlowCoordinator,
+								SoloFreePlayFlowCoordinator soloFreePlayFlowCoordinator, PartyFreePlayFlowCoordinator partyFreePlayFlowCoordinator, CenterStageScreenController centerStageScreenController)
+		{
+			_menuConfig = menuConfig;
+			_menuLightsManager = menuLightsManager;
+			_mainFlowCoordinator = mainFlowCoordinator;
+			_campaignFlowCoordinator = campaignFlowCoordinator;
+			_centerStageScreenController = centerStageScreenController;
+			_soloFreePlayFlowCoordinator = soloFreePlayFlowCoordinator;
+			_partyFreePlayFlowCoordinator = partyFreePlayFlowCoordinator;
+		}
 
-        public Color Color => _menuConfig.Enabled ? _menuConfig.DefaultColor : defaultMenuLights.lightIdColorPairs[0].baseColor;
-
-        public void Initialize()
+		public Color Color
+		{
+			get => _menuConfig.Enabled ? _menuConfig.DefaultColor : defaultMenuLights.lightIdColorPairs[0].baseColor;
+			set { }
+		}
+		public void Initialize()
         {
             defaultMenuLights = _menuLightsManager.GetField<MenuLightsPresetSO, MenuLightsManager>("_defaultPreset");
             var playersPlace = GameObject.Find("PlayersPlace");

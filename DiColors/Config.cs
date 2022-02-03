@@ -13,7 +13,7 @@ namespace DiColors
 
         public virtual string Name { get; set; } = "Default";*/
 
-        [NonNullable, UseConverter(typeof(HiveVersionConverter))]
+        [NonNullable, UseConverter(typeof(VersionConverter))]
         public Version Version { get; set; } = new Version("1.0.0");
 
 		[NonNullable]
