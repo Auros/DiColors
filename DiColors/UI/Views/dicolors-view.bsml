@@ -3,7 +3,19 @@
 	>
 
 
-    <text text="Hello :3"
-          align="Center"
-          font-size="8" />
+    <vertical horizontal-fit="PreferredSize">
+        <horizontal horizontal-fit="PreferredSize">
+            <dropdown-list-setting text="Color"
+                                   value="active-option"
+                                   pref-width="45"
+                                   options="color-profile-options"
+                                   apply-on-change="true"
+                                   bind-value="true" />
+            <color-setting text=" "
+                           pref-width="14"
+                           apply-on-change="true"
+                           value="active-color"
+                           bind-value="true" />
+        </horizontal>
+    </vertical>
 </bg>
