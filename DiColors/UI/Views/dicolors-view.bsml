@@ -1,0 +1,9 @@
+﻿<bg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd"
+	>
+
+
+    <text text="Hello :3"
+          align="Center"
+          font-size="8" />
+</bg>

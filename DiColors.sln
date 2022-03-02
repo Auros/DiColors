@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30503.244
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiColors", "DiColors\DiColors.csproj", "{55622DF0-D9EA-4C4F-A6B4-6B0FD2DCC8CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiColors", "DiColors\DiColors.csproj", "{F5977D04-E620-4551-89E7-B25BA24D0B42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{55622DF0-D9EA-4C4F-A6B4-6B0FD2DCC8CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55622DF0-D9EA-4C4F-A6B4-6B0FD2DCC8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55622DF0-D9EA-4C4F-A6B4-6B0FD2DCC8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55622DF0-D9EA-4C4F-A6B4-6B0FD2DCC8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5977D04-E620-4551-89E7-B25BA24D0B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5977D04-E620-4551-89E7-B25BA24D0B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5977D04-E620-4551-89E7-B25BA24D0B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5977D04-E620-4551-89E7-B25BA24D0B42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

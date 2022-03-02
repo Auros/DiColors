@@ -1,44 +1,18 @@
+﻿using DiColors.Installers;
 using IPA;
-using HarmonyLib;
-using IPA.Loader;
 using SiraUtil.Zenject;
-using System.Reflection;
-using IPA.Config.Stores;
-using DiColors.Installers;
-using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
 
-namespace DiColors
+namespace DiColors;
+
+[NoEnableDisable, Plugin(RuntimeOptions.DynamicInit)]
+public class Plugin
 {
-    [Plugin(RuntimeOptions.DynamicInit)]
-    public class Plugin
+    [Init]
+    public Plugin(IPALogger logger, Zenjector zenjector)
     {
-        internal static IPALogger Log { get; private set; }
-        private readonly Harmony _harmony;
-
-        [Init]
-        public Plugin(Conf conf, IPALogger logger, Zenjector zenjector, PluginMetadata metadata)
-        {
-            Log = logger;
-            Config config = conf.Generated<Config>();
-            _harmony = new Harmony("dev.auros.dicolors");
-            config.Version = metadata.HVersion;
-
-            zenjector.OnApp<DiCInstaller>().WithParameters(config, metadata.HVersion);
-            //zenjector.OnGame<DiCGameInstaller>(false);
-			zenjector.OnMenu<DiCMenuInstaller>();
-        }
-
-        [OnEnable]
-        public void OnEnable()
-        {
-            _harmony.PatchAll(Assembly.GetExecutingAssembly());
-        }
-
-        [OnDisable]
-        public void OnDisable()
-        {
-            _harmony.UnpatchAll("dev.auros.dicolors");
-        }
+        zenjector.UseLogger(logger);
+        zenjector.Install<DiColorsUIInstaller>(Location.Menu);
+        zenjector.Install<DiColorsCoreInstaller>(Location.App);
     }
 }
