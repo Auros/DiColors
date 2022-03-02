@@ -6,8 +6,6 @@ namespace DiColors.Coloring;
 
 internal class TopSignColorizer : Colorizer
 {
-    private Color _color;
-
     private readonly SpriteRenderer[] _sprites = new SpriteRenderer[2];
     private readonly ParticleSystem[] _particles = new ParticleSystem[2];
     private readonly TubeBloomPrePassLight[] _lights = new TubeBloomPrePassLight[4];
@@ -22,11 +20,11 @@ internal class TopSignColorizer : Colorizer
     public override string Name => "(Logo) BEAT";
     public override Color Color
     {
-        get => _color;
+        get => _config.LogoBeatColor;
         set
         {
-            _color = value;
-            ColorSign(_color);
+            _config.LogoBeatColor = value;
+            ColorSign(_config.LogoBeatColor);
         }
     }
 

@@ -5,7 +5,6 @@ namespace DiColors.Coloring;
 
 internal class BottomSignColorizer : Colorizer
 {
-    private Color _color;
     private readonly SpriteRenderer _glowLine;
     private readonly SpriteRenderer _saberLogo;
     private readonly TubeBloomPrePassLight _glowLight;
@@ -14,11 +13,11 @@ internal class BottomSignColorizer : Colorizer
 
     public override Color Color
     {
-        get => _color;
+        get => _config.LogoSaberColor;
         set
         {
-            _color = value;
-            ColorSign(_color);
+            _config.LogoSaberColor = value;
+            ColorSign(_config.LogoSaberColor);
         }
     }
 
