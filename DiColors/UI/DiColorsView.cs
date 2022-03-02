@@ -1,5 +1,6 @@
 ﻿using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
+using DiColors.Coloring;
 using SiraUtil.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ internal class DiColorsView : BSMLAutomaticViewController
     [Inject]
     protected readonly SiraLog _siraLog = null!;
 
+    [Inject]
+    protected readonly List<Colorizer> _colorizers = null!;
 
     [UIValue("color-profile-options")]
     public List<object> Data { get; } = new();
@@ -45,40 +48,13 @@ internal class DiColorsView : BSMLAutomaticViewController
         }
     }
 
-    public class ColorBox
-    {
-        public Color Color { get; set; }
-
-        public ColorBox(Color color)
-        {
-            Color = color;
-        }
-    }
-
     protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
     {
-        List<Color> colors = new()
-        {
-            Color.red,
-            Color.green,
-            Color.blue,
-            Color.magenta,
-            Color.black,
-            Color.yellow,
-            Color.white
-        };
+        if (firstActivation)
+            foreach (var colorizer in _colorizers)
+                Data.Add(new ColorProfileOption(colorizer.Name, () => colorizer.Color, c => colorizer.Color = c));
 
-        for (int i = 0; i < colors.Count; i++)
-        {
-            ColorBox cbA = new(colors[i]);
-            ColorProfileOption co = new("C_" + i, () => cbA.Color, c => cbA.Color = c);
-            Data.Add(co);
-
-            if (i == 0)
-                _activeOption = co;
-        }
-
-        _activeColor = _activeOption.Color;
+        _activeOption = (Data[0] as ColorProfileOption)!;
 
         base.DidActivate(firstActivation, addedToHierarchy, screenSystemEnabling);
     }
