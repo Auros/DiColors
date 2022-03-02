@@ -1,4 +1,5 @@
 ﻿using SiraUtil.Interfaces;
+using Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -11,4 +12,7 @@ internal abstract class Colorizer : IColorable
 
     [Inject]
     protected readonly Config _config = null!;
+
+    [Inject]
+    protected readonly TimeTweeningManager _tweeningManager = null!;
 }

@@ -14,4 +14,5 @@ internal class Config
 
     public virtual Color LogoBeatColor { get; set; }
     public virtual Color LogoSaberColor { get; set; }
+    public virtual Color DefaultMenuColor { get; set; }
 }

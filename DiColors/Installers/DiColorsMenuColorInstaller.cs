@@ -12,6 +12,7 @@ internal class DiColorsMenuColorInstaller : Installer
         Container.Bind<MenuTransformAccessor>().AsSingle();
         Container.Bind<Colorizer>().To<TopSignColorizer>().AsSingle();
         Container.Bind<Colorizer>().To<BottomSignColorizer>().AsSingle();
+        Container.Bind<Colorizer>().To<DefaultMenuColorizer>().AsSingle();
         Container.BindInterfacesTo<StartupColoringDaemon>().AsSingle();
     }
 }
