@@ -1,4 +1,5 @@
-﻿using IPA.Utilities;
+﻿using DiColors.Services;
+using IPA.Utilities;
 using UnityEngine;
 
 namespace DiColors.Coloring;
@@ -6,7 +7,6 @@ namespace DiColors.Coloring;
 internal class TopSignColorizer : Colorizer
 {
     private Color _color;
-    public override string Name => "(Logo) BEAT";
 
     private readonly SpriteRenderer[] _sprites = new SpriteRenderer[2];
     private readonly ParticleSystem[] _particles = new ParticleSystem[2];
@@ -19,39 +19,34 @@ internal class TopSignColorizer : Colorizer
     private static readonly FieldAccessor<FlickeringNeonSign, Color>.Accessor NeonSign_LightOnColor = FieldAccessor<FlickeringNeonSign, Color>.GetAccessor("_lightOnColor");
     private static readonly FieldAccessor<FlickeringNeonSign, Color>.Accessor NeonSign_SpriteOnColor = FieldAccessor<FlickeringNeonSign, Color>.GetAccessor("_spriteOnColor");
 
-    public TopSignColorizer(MenuEnvironmentManager menuEnvironmentManager)
-    {
-        var memTransform = menuEnvironmentManager.transform;
-        var defaultMenuEnv = memTransform.Find("DefaultMenuEnvironment");
-        var logo = defaultMenuEnv.Find("Logo");
-        var flickering = logo.transform.Find("EFlickering");
-
-        _sprites[0] = logo.Find("BatLogo").GetComponent<SpriteRenderer>();
-        _sprites[1] = flickering.Find("LogoE").GetComponent<SpriteRenderer>();
-        _glowLine = defaultMenuEnv.Find("GlowLines").GetComponent<SpriteRenderer>();
-
-        _particles[0] = flickering.Find("SparksUp").GetComponent<ParticleSystem>();
-        _particles[1] = flickering.Find("SparksDown").GetComponent<ParticleSystem>();
-
-        _lights[0] = logo.Find("BNeon").GetComponent<TubeBloomPrePassLight>();
-        _lights[1] = logo.Find("ANeon").GetComponent<TubeBloomPrePassLight>();
-        _lights[2] = logo.Find("TNeon").GetComponent<TubeBloomPrePassLight>();
-        _lights[3] = flickering.Find("ENeon").GetComponent<TubeBloomPrePassLight>();
-
-        _flickeringNeonSign = flickering.GetComponent<FlickeringNeonSign>();
-    }
-
+    public override string Name => "(Logo) BEAT";
     public override Color Color
     {
         get => _color;
         set
         {
             _color = value;
-            ColorSigns(_color);
+            ColorSign(_color);
         }
     }
 
-    private void ColorSigns(Color color)
+    public TopSignColorizer(MenuTransformAccessor menuTransformAccessor)
+    {
+        var flickering = menuTransformAccessor.Logo.transform.Find("EFlickering");
+
+        _flickeringNeonSign = flickering.GetComponent<FlickeringNeonSign>();
+        _sprites[1] = flickering.Find("LogoE").GetComponent<SpriteRenderer>();
+        _particles[0] = flickering.Find("SparksUp").GetComponent<ParticleSystem>();
+        _lights[3] = flickering.Find("ENeon").GetComponent<TubeBloomPrePassLight>();
+        _particles[1] = flickering.Find("SparksDown").GetComponent<ParticleSystem>();
+        _sprites[0] = menuTransformAccessor.Logo.Find("BatLogo").GetComponent<SpriteRenderer>();
+        _lights[0] = menuTransformAccessor.Logo.Find("BNeon").GetComponent<TubeBloomPrePassLight>();
+        _lights[1] = menuTransformAccessor.Logo.Find("ANeon").GetComponent<TubeBloomPrePassLight>();
+        _lights[2] = menuTransformAccessor.Logo.Find("TNeon").GetComponent<TubeBloomPrePassLight>();
+        _glowLine = menuTransformAccessor.DefaultMenuEnvironment.Find("GlowLines").GetComponent<SpriteRenderer>();
+    }
+
+    private void ColorSign(Color color)
     {
         foreach (var sprite in _sprites)
             sprite.color = color;

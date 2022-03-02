@@ -36,6 +36,5 @@ internal class UIDaemon : IInitializable, IDisposable
     {
         if (_menuButton is not null && MenuButtons.IsSingletonAvailable && BSMLParser.IsSingletonAvailable)
             MenuButtons.instance.UnregisterButton(_menuButton);
-        MenuButtons.instance.UnregisterButton(_menuButton);
     }
 }
