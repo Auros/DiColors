@@ -1,7 +1,6 @@
 ﻿using IPA.Utilities;
 using Tweening;
 using UnityEngine;
-using static MenuLightsPresetSO;
 
 namespace DiColors.Coloring;
 
@@ -12,9 +11,6 @@ internal class DefaultMenuColorizer : Colorizer
     private Tween? _tween;
     private readonly MenuLightsManager _menuLightsManager;
 
-    public const int MenuColorLightId = 1;
-
-    private static readonly FieldAccessor<MenuLightsPresetSO, LightIdColorPair[]>.Accessor LightPreset_ColorPairs = FieldAccessor<MenuLightsPresetSO, LightIdColorPair[]>.GetAccessor("_lightIdColorPairs");
     private static readonly FieldAccessor<MenuLightsManager, MenuLightsPresetSO>.Accessor MenuLightsManager_DefaultPreset = FieldAccessor<MenuLightsManager, MenuLightsPresetSO>.GetAccessor("_defaultPreset");
 
     public DefaultMenuColorizer(MenuLightsManager menuLightsManager)

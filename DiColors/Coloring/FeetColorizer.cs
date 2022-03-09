@@ -5,13 +5,13 @@ using Zenject;
 
 namespace DiColors.Coloring;
 
-internal class FeetColorer : Colorizer
+internal class FeetColorizer : Colorizer
 {
     public override string Name => "Menu Feet";
 
     private readonly SpriteRenderer? _feetSprite;
 
-    public FeetColorer(SiraLog siraLog, SceneContext sceneContext)
+    public FeetColorizer(SiraLog siraLog, SceneContext sceneContext)
     {
         var wrapper = sceneContext.gameObject.scene.GetRootGameObjects().Where(g => g.name == "Wrapper").FirstOrDefault();
         if (wrapper != null)
