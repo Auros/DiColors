@@ -13,6 +13,7 @@ internal class DiColorsMenuColorInstaller : Installer
         Container.Bind<Colorizer>().To<TopSignColorizer>().AsSingle();
         Container.Bind<Colorizer>().To<BottomSignColorizer>().AsSingle();
         Container.Bind<Colorizer>().To<DefaultMenuColorizer>().AsSingle();
+        Container.Bind<Colorizer>().To<FeetColorer>().AsSingle();
         Container.BindInterfacesTo<StartupColoringDaemon>().AsSingle();
     }
 }

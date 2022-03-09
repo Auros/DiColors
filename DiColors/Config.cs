@@ -12,6 +12,7 @@ internal class Config
     [NonNullable, UseConverter(typeof(VersionConverter))]
     public virtual Hive.Versioning.Version Version { get; set; } = new Hive.Versioning.Version("0.0.0");
 
+    public virtual Color MenuFeetColor { get; set; }
     public virtual Color LogoBeatColor { get; set; }
     public virtual Color LogoSaberColor { get; set; }
     public virtual Color DefaultMenuColor { get; set; }
