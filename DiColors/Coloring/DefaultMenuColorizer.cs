@@ -12,9 +12,9 @@ internal class DefaultMenuColorizer : Colorizer
     private Tween? _tween;
     private readonly MenuLightsManager _menuLightsManager;
 
+    public const int MenuColorLightId = 1;
+
     private static readonly FieldAccessor<MenuLightsPresetSO, LightIdColorPair[]>.Accessor LightPreset_ColorPairs = FieldAccessor<MenuLightsPresetSO, LightIdColorPair[]>.GetAccessor("_lightIdColorPairs");
-    //private static readonly FieldAccessor<MenuLightsPresetSO, MenuLightsPresetSO>.Accessor LightPreset_DefaultPreset = FieldAccessor<MenuLightsPresetSO, MenuLightsPresetSO>.GetAccessor("_defaultPreset");
-    //private static readonly FieldAccessor<MenuLightsPresetSO, MenuLightsPresetSO>.Accessor LightPreset_DefaultPreset = FieldAccessor<MenuLightsPresetSO, MenuLightsPresetSO>.GetAccessor("_defaultPreset");
     private static readonly FieldAccessor<MenuLightsManager, MenuLightsPresetSO>.Accessor MenuLightsManager_DefaultPreset = FieldAccessor<MenuLightsManager, MenuLightsPresetSO>.GetAccessor("_defaultPreset");
 
     public DefaultMenuColorizer(MenuLightsManager menuLightsManager)
@@ -34,7 +34,7 @@ internal class DefaultMenuColorizer : Colorizer
 
     private void SetColor(Color color)
     {
-        _menuLightsManager.SetColor(1, color);
+        _menuLightsManager.SetColor(MenuColorLightId, color);
 
         Color? oldColor = null;
 
@@ -43,7 +43,7 @@ internal class DefaultMenuColorizer : Colorizer
         var colorPairs = LightPreset_ColorPairs(ref preset);
         foreach (var pair in colorPairs)
         {
-            if (pair.lightId != 1)
+            if (pair.lightId != MenuColorLightId)
                 continue;
 
             if (pair.baseColor is SimpleColorSO simpleColor)
@@ -58,7 +58,7 @@ internal class DefaultMenuColorizer : Colorizer
             return;
 
         _tween?.Kill();
-        _tween = new ColorTween(oldColor.Value, color, u => _menuLightsManager.SetColor(1, u), 0.5f, EaseType.Linear);
+        _tween = new ColorTween(oldColor.Value, color, u => _menuLightsManager.SetColor(MenuColorLightId, u), 0.5f, EaseType.Linear);
 
         _tween.onCompleted += delegate () { _tween = null; };
         _tweeningManager.AddTween(_tween, _menuLightsManager);
